@@ -29,7 +29,7 @@ export class SwapBetComponent {
       let { memonic, address, client } = await connectToSign();
 
       const msg = {
-        typeUrl: "/VoroshilovMax.bettery.funds.MsgCreateSwipeBet",
+        typeUrl: "/bettery.funds.MsgCreateSwipeBet",
         value: {
           creator: address,
           amount: amount,

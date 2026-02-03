@@ -90,7 +90,7 @@ export class PrivateExpertComponent implements OnInit, OnDestroy {
   async sendToDemon(answer) {
     const { memonic, address, client } = await connectToSign();
     const msg = {
-      typeUrl: "/VoroshilovMax.bettery.privateevents.MsgCreateValidPrivEvents",
+      typeUrl: "/bettery.privateevents.MsgCreateValidPrivEvents",
       value: {
         creator: address,
         privId: this.data.id,

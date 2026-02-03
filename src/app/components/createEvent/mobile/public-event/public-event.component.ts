@@ -163,7 +163,7 @@ export class PublicEventComponent implements OnDestroy {
     let { memonic, address, client } = await connectToSign();
 
     const msg = {
-      typeUrl: "/VoroshilovMax.bettery.publicevents.MsgCreateCreatePubEvents",
+      typeUrl: "/bettery.publicevents.MsgCreateCreatePubEvents",
       value: {
         creator: address,
         pubId: id,

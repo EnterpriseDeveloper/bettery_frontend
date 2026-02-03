@@ -75,7 +75,7 @@ export class PrivateFormComponent implements OnInit, OnDestroy {
   async sendToDemon(answer) {
     const { memonic, address, client } = await connectToSign();
     const msg = {
-      typeUrl: "/VoroshilovMax.bettery.privateevents.MsgCreatePartPrivEvents",
+      typeUrl: "/bettery.privateevents.MsgCreatePartPrivEvents",
       value: {
         creator: address,
         privId: this.data.id,

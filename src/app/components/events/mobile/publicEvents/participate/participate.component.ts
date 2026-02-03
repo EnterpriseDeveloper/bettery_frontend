@@ -134,7 +134,7 @@ export class ParticipateComponent implements OnInit, OnDestroy {
       let { memonic, address, client } = await connectToSign();
 
       const msg = {
-        typeUrl: "/VoroshilovMax.bettery.publicevents.MsgCreatePartPubEvents",
+        typeUrl: "/bettery.publicevents.MsgCreatePartPubEvents",
         value: {
           creator: address,
           pubId: this.eventData.id,

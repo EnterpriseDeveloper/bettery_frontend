@@ -1,0 +1,190 @@
+<div class="box">
+  <div *ngIf="!letsJoin">
+    <p class="title">You're invited to an event by </p>
+    <div class="boxName">
+      <p class="hostName">{{eventData?.host.nickName}}</p>
+      <div class="bookImg" (click)="openComingSoonModal(comingSoon)"></div>
+    </div>
+    <div class="gradientBox" [ngStyle]="imgForEvent(eventData)">
+      <div class="avatarBox">
+        <img class="avatar" src={{eventData?.host.avatat}} referrerpolicy="no-referrer">
+      </div>
+      <div class="eventBox-on-event-page">
+        <p class="eventName">{{eventData?.question}}</p>
+      </div>
+    </div>
+    <!--    <div class="arrow"></div>-->
+    <!--    <div class="info">How to participate?</div>-->
+    <!--    <div class="tutorials-place">-->
+    <!--      <div>-->
+    <!--        <p class="mb-0" style="font-size: 22px">Gif Tutorials</p>-->
+    <!--        <p class="mb-0">(coming soon)</p>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <button class="join" (click)="join()">JOIN</button>
+    <div class="privacy-text"><p routerLink="/privacy-policy">Privacy Policy</p></div>
+  </div>
+  <div id="up1" *ngIf="letsJoin" class="bg_img">
+    <div *ngIf="showEvent()">
+      <div *ngIf="!validation">
+        <div class="titleBox" *ngIf="participatedAnswer.length == 0">
+          <div class="imgCoin"></div>
+          <p class="titleBetting">NOW BETTING</p>
+        </div>
+        <div class="titleBox" *ngIf="participatedAnswer.length != 0">
+          <p class="partTitile">Thank you for playing!</p>
+        </div>
+        <p class="titleTwo">Betting ends in <b
+          style="font-weight: 600;">{{day}}:{{hour}}:{{minutes}}:{{seconds}}</b></p>
+      </div>
+      <div *ngIf="validation">
+        <div class="titleBox" *ngIf="validatedAnswer.length == 0">
+          <div class="checkImg"></div>
+          <p class="titleBetting">NOW VALIDATING</p>
+        </div>
+        <div class="titleBox" *ngIf="validatedAnswer.length != 0">
+          <p class="validTitle">Thank you for validating!</p>
+        </div>
+        <p class="only">Only {{remainderExperts()}} more experts to go</p>
+      </div>
+
+      <div class="quizBoxTwo-on-event-page">
+        <div class="gradientBox-on-event-page" [ngStyle]="imgForEvent(eventData)">
+          <div class="eventBox-on-event-page">
+            <p class="eventName">{{eventData?.question}}</p>
+          </div>
+        </div>
+        <!--        <p class="quizText">{{eventData.question}}</p>-->
+      </div>
+
+      <div *ngIf="participatedAnswer.length != 0 || validatedAnswer.length != 0">
+        <div *ngFor="let answer of eventData.answers; index as i" >
+
+          <div class="answerBoxCreated">
+            <p class="answerCreated">{{answer}}</p>
+            <div *ngIf="participatedAnswer.length != 0 && participatedAnswer[0].answer == i"
+                 class="participatedAnswer">
+              <p class="partAmount">{{participatedAnswer[0].amount}} {{coinType}}</p>
+              <img class="avatarHost partPostAvatar" src={{userData.avatar}} referrerpolicy="no-referrer">
+            </div>
+            <div *ngIf="validatedAnswer.length != 0 && validatedAnswer[0].answer == i"
+                 class="participatedAnswer">
+              <img class="avatarHost partPostAvatar" src={{userData.avatar}} referrerpolicy="no-referrer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <form [formGroup]="answerForm" *ngIf="!(participatedAnswer.length != 0 || validatedAnswer.length != 0)">
+
+        <div *ngFor="let answer of eventData.answers">
+          <div class="pretty p-default p-round inline checkBackGround">
+            <input type="radio" value={{answer}} formControlName="answer">
+            <div class="state white checkPos">
+              <label> </label>
+            </div>
+            <p class="label">{{answer}}</p>
+          </div>
+        </div>
+      </form>
+
+      <div class="answerBoxResolution"
+           *ngIf="eventData?.resolutionDetalis != 'undefined' && eventData?.resolutionDetalis.length != 0">
+        <div class="resolutionText"><div>How to verify:</div><div><b>{{makeShortenStr(eventData?.resolutionDetalis, 140)}}</b></div></div>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div>
+        <div class="infoLabelPos">
+          <p class="infoLabel">HOST:</p>
+          <div class="hostBox">
+            <p class="name">{{eventData?.host.nickName}}</p>
+            <img class="avatarHost" src={{eventData.host.avatat}} referrerpolicy="no-referrer">
+          </div>
+        </div>
+        <div class="infoLabelPos">
+          <p class="infoLabel">{{poolName()}} pool:</p>
+          <p class="name">{{checkFractionalNumb(currentPool, 0, '+')}} {{coinType}}</p>
+        </div>
+        <div class="infoLabelPos">
+          <p class="infoLabel">PLAYERS joined:</p>
+          <div class="partBox">
+            <div *ngFor="let part of eventData.parcipiantAnswers; index as i">
+              <div [ngStyle]="getPartPos(i, 'part')">
+                <img *ngIf="i <= 3" class="partImg" referrerpolicy="no-referrer" src="{{part.avatar}}">
+              </div>
+            </div>
+            <p class="name playersNumber">{{playersJoinde}}</p>
+          </div>
+        </div>
+        <div class="infoLabelPos" *ngIf="!validation && !created">
+          <p class="infoLabel">Experts needed:</p>
+          <div class="partBox">
+            <p class="name playersNumber">{{validatorsNeeded()}}</p>
+          </div>
+        </div>
+        <div *ngIf="validation" class="infoLabelPos">
+          <p class="infoLabel">EXPERTS joined:</p>
+          <div class="partBox">
+            <div *ngFor="let valid of eventData.validatorsAnswers; index as i">
+              <div [ngStyle]="getPartPos(i, 'valid')">
+                <img *ngIf="i <= 3" class="partImg" referrerpolicy="no-referrer" src="{{valid.avatar}}">
+              </div>
+            </div>
+            <p class="name playersNumber">{{expertJoinned}}</p>
+          </div>
+        </div>
+
+
+        <div *ngIf="created" class="aboutBox">
+          <p class="byLink">share event with friends!</p>
+          <a class="link" href="#">www.bettery.io/public_event/{{eventData?.id}}</a>
+          <div class="imgBox" (click)="copyToClickBoard()">
+            <div class="listImg" style="margin-right: 8px"></div>
+            <p class="copyToClick">Copy to clipboard</p>
+            <div class="copied" [ngClass]="copyLinkFlag && 'showLink'">Link copied!</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="!created">
+        <div *ngIf="!validation">
+          <button class="buttonBecome buttonColorPlayer" (click)="joinAsPlayer()">JOIN AS PLAYER</button>
+          <a class="linkInfo colorLinkPlayer" (click)="modalAboutPlayers()">What is a Player?</a>
+          <button *ngIf="userData?._id != eventData?.host.id" class="buttonBecome buttonColorExpert"
+                  (click)="joinAsExpert()">BECOME AN EXPERT
+          </button>
+          <a *ngIf="userData?._id != eventData?.host.id" class="linkInfo colorLinkExpert" (click)="modalAboutExpert()">What
+            is an Expert?</a>
+        </div>
+        <div *ngIf="validation && userData?._id != eventData?.host.id">
+          <button class="buttonBecome buttonColorExpert" (click)="joinAsExpert()">JOIN AS EXPERT</button>
+          <a class="linkInfo colorLinkExpert" (click)="modalAboutExpert()">What is an Expert?</a>
+        </div>
+      </div>
+
+      <div class="arrow"></div>
+      <app-comment class="deep-comment" [mobile]="true" [theme]=themeChat [userData]=userData
+                   [id]=eventData.id></app-comment>
+    </div>
+
+    <info *ngIf="showInfo()" [eventData]="eventData" [joinedAs]="joinedAs" (goBack)="goBack()" (agree)="agree()">
+    </info>
+    <participate *ngIf="showParticipate()" [eventData]="eventData" [inputForm]="answerForm" (goBack)="goToInfo('player')"
+                 (goViewStatus)="interactionDone($event)"></participate>
+    <validate *ngIf="showValidate()" [eventData]="eventData" [inputForm]="answerForm" (goBack)="goToInfo('expert')"
+              (goViewStatus)="interactionDone($event)"></validate>
+  </div>
+</div>
+
+<ng-template #comingSoon let-modal>
+  <button type="button" class="close comingSoonClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="modal-body">
+    <p class="title_coming_soon">COMING SOON</p>
+    <p class="text_coming_soon">In the next updates, you can check more details about the event host here.</p>
+  </div>
+
+</ng-template>

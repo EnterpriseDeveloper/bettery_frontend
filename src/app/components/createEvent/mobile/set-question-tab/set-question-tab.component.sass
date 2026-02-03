@@ -1,0 +1,233 @@
+.box
+    display: flex
+    flex-direction: column
+    margin-left: 16px
+    margin-right: 16px
+
+.name
+    font-family: 'Open Sans', sans-serif
+    font-style: normal
+    font-weight: bold
+    font-size: 14px
+    line-height: 19px
+    text-transform: uppercase
+    color: #FFFFFF
+    display: flex
+
+.img
+    width: 24px
+    height: 24px
+
+.text
+    left: 5px
+    top: 3px
+    position: relative
+
+.question
+    background: rgba(50, 58, 64, 0.96)
+    border-radius: 8px
+    border: 0px
+    min-height: 86px
+    height: auto
+    color: #FFFFFF
+
+.question::placeholder
+    font-family: 'Open Sans', sans-serif
+    font-style: normal
+    font-weight: bold
+    font-size: 20px
+    line-height: 27px
+    display: flex
+    align-items: center
+    text-align: center
+    padding-top: 26px
+    color: #7D7D7D
+
+.answer
+    background: rgba(50, 58, 64, 0.96)
+    border-radius: 8px
+    border: 0px
+    color: #FFFFFF
+    font-weight: bold
+    width: 100%
+    min-height: 48px
+    height: auto
+    padding-left: 16px
+
+.answer::placeholder
+    font-family: 'Open Sans', sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 14px
+    line-height: 19px
+    color: #7D7D7D
+    //padding-left: 19px
+
+.answer:focus
+  outline: none
+  border-color: #2B3059
+
+.adapting::placeholder
+    font-size: 10px
+    font-weight: 500
+
+.iconBox
+    background-color: #3B3B3B
+    width: 25px !important
+    height: 25px !important
+    border-radius: 50%
+    display: inline-flex
+    position: relative
+    top: 7px
+
+.add
+    background-color: transparent
+    border: 0px
+    margin-top: 10px
+    margin-bottom: 16px
+.add:focus
+  outline: none
+.add:active
+  outline: none
+
+.addText
+    font-family: 'Open Sans', sans-serif
+    font-style: normal
+    font-weight: 600
+    font-size: 14px
+    line-height: 19px
+    color: #FFFFFF
+    padding-left: 8px
+
+.iconPlus
+    color: #FFD300
+    position: relative
+    top: -1px
+    left: 7px
+
+.border1
+    border-top: 0.5px solid #B6B6B6 !important
+
+.optional
+    font-weight: lighter
+    font-size: 12px
+    text-transform: lowercase
+
+.cancel
+    background: #C4C4C4
+    border-radius: 8px
+    border: 0px
+    height: 48px
+    margin-right: 15px
+    flex: 1
+
+.next
+    background: #FDD92A
+    border-radius: 8px
+    border: 0px
+    height: 48px
+    flex: 1
+
+.buttonBox
+    margin-top: 23px
+    display: flex
+    overflow: auto
+    text-align: center
+    padding: 0 15px 14px 15px
+
+.privacy-text
+  font-weight: 600
+  font-size: 14px
+  line-height: 19px
+  text-align: center
+  text-decoration-line: underline
+  color: #FFD300
+  text-align: center
+  & p
+    margin-top: 6px
+    margin-bottom: 30px
+
+.quize_validation_error
+    font-family: 'Open Sans', sans-serif
+    font-style: normal
+    font-weight: 600
+    font-size: 10px
+    line-height: 14px
+    text-align: right
+    color: #EC0100
+
+.is_invalid
+    border: 1px solid #EC0100 !important
+
+.inputBox
+    position: relative
+
+.deleteButtonPos
+    position: absolute
+    right: 10px
+    height: 100%
+    z-index: 1
+
+.trashImg
+    width: 16px
+    height: 16px
+    background: url(../../../../../assets/create-event/Trash.png) left center no-repeat
+    background-size: contain
+
+.deleteButton
+    background-color: transparent
+    border: none
+    height: 100%
+
+.plus
+    background: url("../../../../../assets/create-event/plusYe11.png") center center no-repeat
+    background-size: contain
+    width: 24px
+    height: 24px
+
+@media (max-height: 1024px)
+.buttonBox
+    position: absolute
+    bottom: 0
+    width: 100%
+    padding: 0 15px 10px 15px
+
+@media (max-height: 800px)
+.buttonBox
+    position: relative
+    margin: 23px auto 0 auto
+    width: 100%
+    padding: 0 15px 10px 15px
+
+@media (min-width: 1024px) and (min-height: 667px)
+.buttonBox
+    position: relative !important
+
+@media (max-height: 568px)
+.buttonBox
+    width: 100%
+    padding: 0 0 10px 0
+
+.showLimit
+  font-style: normal
+  font-weight: bold
+  font-size: 12px
+  line-height: 16px
+  text-transform: uppercase
+  color: #7d7d7d
+
+.limitText
+  font-weight: bold
+  font-size: 12px
+  line-height: 16px
+  text-transform: uppercase
+  color: #FFFFFF
+
+.image-edit-shadow
+  background: rgba(0, 0, 0, 0.75)
+  min-height: 100%
+  width: 100%
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 2

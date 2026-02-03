@@ -1,0 +1,16 @@
+export const environment = {
+  authDomain: "dev-n2howlj03exhj5t3.us.auth0.com",
+  production: true,
+  locales: ["en", "vn"],
+  defaultLocale: "en",
+  apiUrl: "https://api.bettery.io",
+  biconomy: "qhib4zfV0.2244c10d-a20e-4cdc-b8fd-3080905f7444",
+  maticId: 137,
+  etherId: 1,
+  torusVerifierId: "bettery-auth0-prod",
+  gasStationAPI: "https://gasstation-mainnet.matic.network",
+  secretKey: "791351803491091234",
+  demon: "https://demon.bettery.io/",
+  auth0_URI: "https://www.bettery.io",
+  clientId: "49atoPMGb9TWoaDflncmvPQOCccRWPyf",
+};

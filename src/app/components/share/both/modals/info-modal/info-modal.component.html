@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <div class="boxImg">
+        <div class="img"></div>
+    </div>
+    <button type="button" class="close border-hover" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <p class="text"><b>{{boldName}}</b> {{name}}</p>
+    </div>
+    <div *ngIf="name1">
+      <p class="text">{{name1}}</p>
+    </div>
+    <div *ngIf="name2">
+      <p class="text">{{name2}}</p>
+    </div>
+    <div *ngIf="link" class="text-center">
+        <a href="https://friendlybets.medium.com/from-social-betting-to-collective-knowledge-part-1-why-your-opinion-matters-cf0cd384def8" target="_blank" class="link">{{link}}</a>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="bg_img_two"> <!--bg_img-->
+  <div class="now_batting__title">
+    <div class="login_name">
+      <div>
+        <p><span>welcome, PLAYER!</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="question_second">
+    <div class="question_text">
+      <div class="question-padding">
+        <p>{{data?.question}}</p>
+      </div>
+    </div>
+  </div>
+
+  <form action="#" [formGroup]="answerForm" (change)="formValid = false">
+    <div class="answers_item" *ngFor="let a of data?.answers; let i = index">
+      <div class="pretty p-default p-round ">
+        <input class="input" formControlName="answer" type="radio" name="answer" value="{{a}}">
+        <div class="state">
+          <label><b>{{a}}</b></label>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="formValid" class="form_valid">Please make your choice</div>
+  </form>
+
+  <div class="wrapper_btn">
+    <div class="results_mail" [ngStyle]="{'padding-bottom': errorMessage ? '20px' : '63px'}">
+      <p>We’ll notify the results to your email</p>
+      <div><span>{{userData.email}}</span></div>
+    </div>
+
+    <div *ngIf="errorMessage">
+      <div class="errorImg"></div>
+      <p class="errMsg">{{errorMessage}}</p>
+    </div>
+    <div class="two_button">
+      <button class="btn_back" (click)="betOrBackBtn(true)">Back</button>
+      <button class="btn_bet" (click)="sendAnswer(answerForm)">Bet</button>
+    </div>
+  </div>
+</div>
+
+<app-spinner-loading *ngIf="spinnerLoading"></app-spinner-loading>

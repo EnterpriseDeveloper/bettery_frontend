@@ -1,0 +1,47 @@
+<div  class="sort-bar">
+<div class="main-warp pl-0 pr-0  container" style=" padding-top: 40px">
+<div class="container-fluid pl-0 pr-0" style="max-width: 1920px">
+  <div class="sort-wrap row">
+    <div class="input-group col-6">
+      <div class="input-group-prepend corect">
+        <div class="input-group-text" id="basic-addon1">
+
+        </div>
+      </div>
+      <input type="text" class="form-control" name="searchWord" [(ngModel)]="searchWord" placeholder="What are you interested in?" aria-label="Username"
+             aria-describedby="basic-addon1" (keyup)="letsFindEvent()">
+    </div>
+    <div class="col-6 d-flex" style="height: 100%; position: relative">
+      <div class="btn-item btn-text mr-3 social-img">Social</div>
+      <div class="btn-item-3 btn-text btn-item-2 mr-3 btn-item-padding moments-img">Moments</div>
+      <div class="btn-text btn-item-3 live-img">Live</div>
+      <div class="gps" (click)="openFilter()">
+        <div class="text-disactive text-right text-disactive-last">Filter by subject ({{amount}}/{{allAmountEvents}})</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-6 d-flex">
+      <div (click)="changesActiveBtn('trending')" class="text-disactive" [ngClass]="active === 'trending' && 'text-active'">
+        <span>Trending</span>
+      </div>
+      <div (click)="changesActiveBtn('controversial')" class="text-disactive" [ngClass]="active === 'controversial' && 'text-active'">
+        Controversial
+      </div>
+      <div (click)="changesActiveBtn('following')" class="text-disactive" [ngClass]="active === 'following' && 'text-active'">
+        Following
+      </div>
+      <div (click)="changesActiveBtn('pro')" class="text-disactive d-flex" [ngClass]="active === 'pro' && 'text-active'">
+        <div [ngClass]="active=== 'pro' ? 'baksGreen-img' : 'baks-img'"></div>
+        <span class="ml-2">Pro</span>
+      </div>
+    </div>
+    <!--    <div class="col-6">-->
+    <!--      <div class="text-disactive text-right text-disactive-last">Filter by subject (4/12)</div>-->
+    <!--    </div>-->
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,174 @@
+{
+  "NAVBAR": {
+    "ITEM_1": "Что ты можешь",
+    "ITEM_2": "Как это устроено",
+    "ITEM_3": "Почему Bettery",
+    "ITEM_4": "Продажа токенов",
+    "ITEM_5": "Дорожная карта",
+    "ITEM_6": "Команда",
+    "ITEM_7": "Инвесторам",
+    "ITEM_8": "Блог",
+    "ITEM_9": "FAQ",
+    "ITEM_10": "Наш Telegram"
+  },
+
+  "HEADER": {
+    "TITLE_PART_1": "Соберите всех вместе,",
+    "TITLE_PART_2": "чтобы обсудить важное",
+    "TEXT": "Расскажите о событии, которое имеет значение для ваших друзей или сообщества, и позвольте всем сделать ставку или сказать правду.",
+    "HEADER_QUESTION": "Какая будет погода завтра в",
+    "QUESTION_END": "Saigon?",
+    "BUTTON_TEXT": "Создать событие",
+    "OR_JOIN": {
+      "1": "или присоединяйтесь к событиям Bettery",
+      "2": "событий"
+    },
+    "JOIN": "Выбор",
+    "TOP_QUESTIONS": ["Какая команда выиграет Эль-Класико?", "Какая погода будет завтра в Сайгоне?"],
+    "TOP_PLACEHOLDER": "Пожалуйста, введите свои вопросы ...",
+    "POPOVER": {
+      "1": "Скоро случится что-то ",
+      "2": "непредсказуемое? Спросите здесь",
+      "3": "и нажмите Create Event, чтобы",
+      "4": "сделать ставку с друзьями!"
+    }
+  },
+
+  "SECOND": {
+    "TITLE": "Bettery работает на вас",
+    "TEXT_1": "Чтобы быть достойным старания, придут, прочные и легкие в полет, все подарки, которые считались теми, кого никто из них не встретил, из-за проблемы хвалы песнопениями,",
+    "TEXT_2": "Чтобы быть достойным старания, придут, прочные и легкие в полет, все подарки, которые считались теми, кого никто из них не встретил, из-за проблемы хвалы песнопениями,",
+    "CARD_TITLE_1": "Сообщество социальных сетей",
+    "CARD_TITLE_2": "Самостоятельно",
+    "CARD_TITLE_3": "Друзья и Товарищи",
+    "CARD_TEXT_1": "Все подарки, которые считались теми, кого никто из них не встретил, из-за проблемы хвалы песнопениями",
+    "CARD_TEXT_2": "Все подарки, которые считались теми, кого никто из них не встретил, из-за проблемы хвалы песнопениями",
+    "CARD_TEXT_3": "Все подарки, которые считались теми, кого никто из них не встретил, из-за проблемы хвалы песнопениями"
+  },
+
+  "THIRD": {
+    "TITLE": "Каждый может выбрать себе роль",
+    "TEXT": "Задача организации, в особенности же укрепление и развитие структуры позволяет оценить значение существенных финансовых и административных условий.Значимость этих проблем настолько очевидна,"
+  },
+
+  "FOUR": {
+    "TITLE": "Почему Bettery?",
+    "TEXT_1": "Чтобы быть достойным старания, придут, прочные и легкие в полет, все подарки, которые считались теми, кого никто из них не встретил, из-за проблемы хвалы песнопениями,",
+    "TEXT_2": "Чтобы быть достойным старания, придут, прочные и легкие в полет, все подарки, которые считались теми, кого никто из них не встретил, из-за проблемы хвалы песнопениями,",
+    "CARD_TITLE_1": "Бескомпромиссные результаты",
+    "CARD_TITLE_2": "Только между вами",
+    "CARD_TITLE_3": "Вывод средств без проблем",
+    "CARD_TITLE_4": "Поистине персонализированный",
+    "CARD_TEXT_1": "Помимо рейтингов для отсеивания читеров, ваш заработок всегда доступен. Никаких тупиков.",
+    "CARD_TEXT_2": "Выбирайте любую тему и любую награду: ужин, бесплатный напиток - не обязательно деньги!. Никаких тупиков.",
+    "CARD_TEXT_3": "Помимо рейтингов для отсеивания читеров, ваш заработок всегда доступен. Никаких тупиков.",
+    "CARD_TEXT_4": "Выбирайте любую тему и любую награду: ужин, бесплатный напиток - не обязательно деньги!"
+  },
+
+  "TOKEN_SALE": {
+    "TITLE": "Продажа токенов Bettery",
+    "TEXT": "Результаты переводы Пользователи Bettery присоединяются к мероприятиям, чтобы зарабатывать токены BET, которые можно обменять на токены BTY и продать на биржах. Чтобы привлечь высокопоставленных пользователей, Организаторы могут использовать BTY в качестве вознаграждения для участников премиальных мероприятий. BTY и BET являются ключевыми компонентами токеномии Bettery. Хозяева и инвесторы могут приобрести BTY через официальную продажу токенов Bettery.",
+    "JOIN_TOKEN_SALE": "Присоединяйтесь",
+    "MORE_ON_BETTERY": "Подробнее о токеномии bettery",
+    "FULL_TOKENOMICS": "Токеномика полной bettery будет запущена в:"
+  },
+
+  "ROADMAP": {
+    "TITLE": "Дорожная карта",
+    "TEXT_1": "Bettery is designed to be a digital playground for people and brands to build genuine relationships with one another in an exciting, highly personalized way. All our development activities - past, present, and future - are always",
+    "TEXT_2": " available ",
+    "TEXT_3": "to the public.",
+    "DATE_1": "Июнь 2020",
+    "DATE_2": "Сентябрь 2020",
+    "DATE_3": "Октрябрь 2020",
+    "DATE_4": "Декабрь 2020",
+    "ROADMAP_UP_TEXT-1": "Публичный прототип",
+    "ROADMAP_UP_TEXT-2": "MVP",
+    "ROADMAP_UP_TEXT-3": "Release \nfor Web",
+    "ROADMAP_UP_TEXT-4": "Mobile\nApplication",
+    "ROADMAP_TEXT-1": "дальнейшее развитие различных форм деятельности",
+    "ROADMAP_TEXT-2": "дальнейшее развитие различных форм деятельности",
+    "ROADMAP_TEXT-3": "Desktop version. Advisor & Moderator roles. Media in Events.",
+    "ROADMAP_TEXT-4": "Mobile application. Integration to Social Media. Live Events."
+  },
+
+  "TEAM": {
+    "TEXT": "Bettery is a platform for enthusiasts, built by enthusiasts. Our humble yet passionate team consists of experts with mastery in distributed systems, creative design, and most importantly, satisfactory user experience.",
+    "NAME_7": "Secret Advisor",
+    "STATUS_7": "Advisor",
+    "EXPERTISE": "Experience:",
+    "PASSION": "Passion:",
+    "FEDOR":  {
+      "NAME": "Fedor",
+      "STATUS": "Product Owner, Founder",
+      "EXPERTISE": "Synergize software development and international B2B sales, worked with the team for years before starting Bettery.",
+      "PASSION": "Ownerless Business, Smart Devices."
+    },
+    "SIM":  {
+      "NAME": "Sim",
+      "STATUS": "Business Analyst, Founding Team",
+      "EXPERTISE": "Know what users want financially and psychologically based on his previous experience running a mining farm and moderating Facebook content.",
+      "PASSION": "Countrysides, Yachts. "
+    },
+    "MAXIM":  {
+      "NAME": "Maxim",
+      "STATUS": "Development Lead, Founding Team",
+      "EXPERTISE": "Give life to ideas and designs mapped out on graphics and slides with the power of coding. ",
+      "PASSION": "Blockchain Programming."
+    },
+    "SHANE":  {
+      "NAME": "Shane",
+      "STATUS": "Content Marketer",
+      "EXPERTISE": "Transform endless walls of text into user-friendly and meaningful content that you’ll have a blast reading.",
+      "PASSION": "Writing, Literary Analysis, Gaming."
+    },
+    "NELSON":  {
+      "NAME": "Nelson",
+      "STATUS": "UX/UI Designer",
+      "EXPERTISE": "Transform rough wireframe sketches into vivid, intuitive interfaces and designs you’ll never grow tired of using.",
+      "PASSION": "Technology, Sports, Gaming."
+    },
+    "KEN":  {
+      "NAME": "Ken",
+      "STATUS": "Legal Advisor",
+      "EXPERTISE": "Evolving regulations of blockchain and cryptocurrency, able to turn risky into riskless and bring forth its value to the public.",
+      "PASSION": "World Affairs, Video Games"
+    }
+  },
+
+  "FORM": {
+    "TITLE": "Начать легко",
+    "TEXT": "Мы никогда не используем вашу информацию для иных целей, кроме как для демонстрации вам ценных демонстраций.",
+    "FIRST_NAME": "Имя",
+    "LAST_NAME": "Фамилия",
+    "EMAIL" : "Почта",
+    "PHONE_NUMBER": "Номер телефона",
+    "FIRM": "Фірма",
+    "VALIDATOR": "Это поле обязательно к заполнению",
+    "EMAIL_ERROR": "Это не почта",
+    "BUTTON_TEXT": "Забронировать демо"
+  },
+
+  "FOOTER": {
+    "TITLE_1": "Про нас",
+    "TITLE_2": "Оставайтесь на связи",
+    "TEXT_1": "Чтобы быть достойным старания, придут, прочные и легкие в полет, все подарки,",
+    "TEXT_2": "Чтобы быть достойным старания, придут,",
+    "BUTTON_TEXT": "Подписаться",
+    "BUTTON_TEXT_2": "You're in!",
+    "PLACE_HOLDER": "Введите адрес электронной почты"
+  },
+
+  "MODAL": {
+    "TITLE": "Инвесторам",
+    "TEXT": "Общий опыт объединяет людей, а не только прошлые воспоминания",
+    "TEXT-2": "- вот почему мы создаем Bettery. Наша команда рада обсудить возможности со стартап-инвесторами, которые разделяют наше видение.",
+    "DOWNLOAD": "Скачать"
+  },
+
+  "LANGUAGES": {
+    "EN": "English",
+    "VN": "Vietnam",
+    "TITLE": "Language"
+  }
+}

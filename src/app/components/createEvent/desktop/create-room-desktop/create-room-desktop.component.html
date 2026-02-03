@@ -1,0 +1,114 @@
+<div class="box">
+  <form *ngIf="allRooms?.length > 0" [formGroup]="createRoomForm">
+    <div class="checkBoxPos">
+      <div class="pretty p-default p-round inline ">
+        <input type="radio" value="exist" formControlName="createNewRoom">
+        <div class="state checkPos p-success-o">
+          <label> </label>
+        </div>
+        <div class="tab" [ngClass]="{ 'tab_active': r.createNewRoom.value == 'exist' }">Existing room</div>
+      </div>
+
+      <div class="pretty p-default p-round inline">
+        <input type="radio" value="new" formControlName="createNewRoom" checked>
+        <div class="state p-success-o checkPos">
+          <label id="l"> </label>
+        </div>
+        <div class="tab" [ngClass]="{ 'tab_active': r.createNewRoom.value == 'new' }">New room</div>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="allRooms?.length > 0" class="borderLine"></div>
+
+  <div *ngIf="r.createNewRoom.value == 'exist'">
+    <form [formGroup]="existRoom">
+      <div class="lableBox">
+        <p class="name">CHOOSE ROOM</p>
+      </div>
+      <select [ngClass]="{ 'is_invalid': submitted && e.roomId.errors }"
+              formControlName="roomId" class="btn" name="roomId" id="roomId">
+        <option *ngFor="let room of allRooms; let i = index" value="{{room.id}}">{{room.name}}</option>
+      </select>
+      <div *ngIf="submitted && e.roomId.errors">
+        <small *ngIf="e.roomId.errors.required" class="form-text quize_validation_error">Choose room is
+          required</small>
+      </div>
+      <div class="buttonBox buttonBox_1" [ngClass]="{ 'mt-160': r.createNewRoom.value == 'exist' }">
+        <button type="button" class="cancel" (click)="cancel()">Back</button>
+        <button type="button" class="next" (click)="chooseRoom()">Next</button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="r.createNewRoom.value == 'new'">
+    <div class="lableBox">
+      <div><p class="name">ROOM NAME AND COLOR</p></div>
+      <div class="limitText" *ngIf="isLimit">
+          <span
+            [ngStyle]="colorError(f.roomName.value.length, 25,32)">{{f.roomName.value.length}}/</span>32
+      </div>
+    </div>
+    <form [formGroup]="roomForm">
+      <div class="form-group position-relative">
+        <div style="position: relative">
+          <div class="__htmlarea questionTextarea __answer" style="display: flex; align-items: center; min-height: 48px">
+            <span>{{letsSlice(f?.roomName.value, 0, 32)}}</span>
+            <span *ngIf="f.roomName.value.length > 32"
+                  class="spanBg">{{letsSlice(f?.roomName.value, 32, 42)}}</span>
+          </div>
+          <input
+            style="min-height: 48px"
+            maxlength="42"
+            (keydown)="limitError()"
+            #textarea
+            class="__textarea questionTextarea __answer placeH"
+            formControlName="roomName"
+            id="roomName"
+            placeholder="{{nickName}}’s room"
+            [ngClass]="{ 'is_invalid': submitted && f.roomName.errors }"
+          />
+        </div>
+        <div>
+          <div class="gradientPicker" [ngStyle]="{'background': f.roomColor.value}">
+            <div class="reloadImg" (click)="generateGradient()"></div>
+          </div>
+        </div>
+        <div *ngIf="submitted && f.roomName.errors">
+          <small *ngIf="f.roomName.errors.required" class="form-text quize_validation_error">Room name is
+            required</small>
+        </div>
+      </div>
+      <div *ngIf="roomError">
+        <small class="form-text quize_validation_error">Room with this name already exist</small>
+      </div>
+      <div>
+        <div class="corectPosition">
+          <p class="name paddingName">WHO IS THIS ROOM FOR?</p>
+          <span class="learMore" (click)="modalAboutExpert()">Learn more</span>
+        </div>
+
+        <div class="checkBoxPos tabPos2">
+          <div class="pretty p-default p-round inline">
+            <input formControlName="eventType" type="radio" value="private" checked>
+            <div class="state p-success-o checkPos">
+              <label> </label>
+            </div>
+            <div class="tab" [ngClass]="{ 'tab_active': f.eventType.value == 'private' }">Friends</div>
+          </div>
+
+          <div class="pretty p-default p-round inline">
+            <input formControlName="eventType" type="radio" value="public">
+            <div class="state p-success-o checkPos">
+              <label> </label>
+            </div>
+            <div class="tab" [ngClass]="{ 'tab_active': f.eventType.value == 'public' }">Social Media</div>
+          </div>
+        </div>
+      </div>
+      <div class="buttonBox buttonBox_1" [ngClass]="allRooms?.length > 0 && 'mt-50'">
+        <button type="button" class="cancel" (click)="cancel()">Back</button>
+        <button type="button" class="next" (click)="createRoom()">Next</button>
+      </div>
+    </form>
+  </div>
+</div>
+

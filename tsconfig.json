@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": false,
+    "strictPropertyInitialization": false, // TODO
+    "noImplicitAny": false, // TODO
+    "strictNullChecks": false, // TODO
+
+    "strict": true,
+    "skipLibCheck": true,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  }
+}

@@ -1,0 +1,131 @@
+<nav class="navbar navbar-light" *ngIf="display">
+  <div class="logoBox">
+    <div class="logo-desc" routerLink="/"></div>
+  </div>
+  <div *ngIf="nickName === undefined">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar_row">
+      <li class="nav-item">
+        <div class="loginBox mt-3" (click)="loginWithTorus()">
+          <p class="login" style="color: #4E4E4E; font-size: 16px; font-weight: 600; margin-right: 10px">Log in</p>
+          <div class="enter-black"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="nickName !== undefined">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar_row">
+      <li class="nav-item">
+        <div class="balanceBox">
+
+          <div class="balancePos mr-4">
+            <p *ngIf="!amountSpinner" class="balance colorBl" style="font-weight: 500;">
+              <b>{{coinInfo?.BTY | number:'1.0-2'}}</b> BTY
+            </p>
+            <p *ngIf="amountSpinner" class="balance colorBl" style="font-weight: 400;">Calculating...</p>
+            <div class="btyImg btyImgNew"></div>
+          </div>
+
+          <div class="balancePos mr-4">
+            <p *ngIf="!amountSpinner" class="balance colorBl" style="font-weight: 500;">
+              <b>{{coinInfo?.BET | number:'1.0-2'}}</b> BET
+            </p>
+            <p *ngIf="amountSpinner" class="balance colorBl" style="font-weight: 400;">Calculating...</p>
+            <div class="ethImg btyImgNew"></div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div (click)="toggleLogout(true)" class="user_email"> {{nickName}}</div>
+      </li>
+      <li class="nav-item position-relative">
+        <img  (click)="toggleLogout(true)" class="circle-img" src="{{avatar}}" alt="avatar" referrerpolicy="no-referrer">
+        <div *ngIf="logoutBox" class="logoutBox">
+          <ul>
+            <li class="profile" routerLink="/profile" (click)="toggleLogout(false)">My profile</li>
+            <li class="refLink refImg no-wrap" (click)="copyRefLink()">Referral Link <div class="copied" [ngClass]="copyLinkFlag && 'showLink'">Link copied!</div></li>
+<!--            <li *ngIf="!environments.production" class="profile no-wrap" (click)="openDeposit('deposit')">Deposit BTY</li> &lt;!&ndash; TODO remove from prod when it will be done&ndash;&gt;-->
+<!--            <li *ngIf="!environments.production" class="profile no-wrap" (click)="openDeposit('withdraw')">Withdraw BTY</li> &lt;!&ndash; TODO remove from prod when it will be done&ndash;&gt;-->
+<!--            <li *ngIf="!environments.production" class="profile no-wrap" (click)="openSwapBetToBTY()">Swap BET to BTY</li> &lt;!&ndash; TODO remove from prod when it will be done&ndash;&gt;-->
+<!--            <li class="profile disabledItem no-wrap">My Torus Wallet</li>-->
+            <li class="Logout" (click)="newlogOut()">Logout</li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <notifications [userId]="userId" (click)="toggleLogout(false)"></notifications>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div>
+  <div class="mobileNavbar" *ngIf="display" #insideElement>
+    <div class="logoBox">
+      <div class="logo" routerLink="/join"></div>
+    </div>
+    <div *ngIf="nickName === undefined" class="loginBox" (click)="loginWithTorus()">
+      <div class="enter"></div>
+      <p class="login">Login</p>
+    </div>
+    <div *ngIf="nickName !== undefined" class="loginBoxRegist" (click)="navBar()">
+      <p class="userNickName">{{nickName}}</p>
+      <img src={{avatar}} class="avatarImg" referrerpolicy="no-referrer">
+    </div>
+    <div *ngIf="openNavBar" class="positionNavbar">
+      <div class="balanceBox">
+        <div class="balancePos">
+          <p *ngIf="!amountSpinner" class="balance" style="font-weight: 500;">
+            <b>{{coinInfo?.BET | number:'1.0-2'}}</b> BET
+          </p>
+          <p *ngIf="amountSpinner" class="balance" style="font-weight: 400; font-size: 12px">Calculating...</p>
+          <div class="ethImg"></div>
+        </div>
+        <div class="balancePos">
+          <p *ngIf="!amountSpinner" class="balance" style="font-weight: 500;">
+            <b>{{coinInfo?.BTY | number:'1.0-2'}}</b> BTY
+          </p>
+          <p *ngIf="amountSpinner" class="balance" style="font-weight: 400; font-size: 12px">Calculating...</p>
+          <div class="btyImg"></div>
+        </div>
+        <div class="balancePos" style="padding-top: 14px">
+          <button class="lowOnCoins" (click)="openModal(contentModal)">Need more?</button>
+        </div>
+      </div>
+
+      <div class="arrow"></div>
+      <div class="navBox">
+        <button class="navLink">Event History</button>
+      </div>
+      <div class="arrow"></div>
+      <div class="navBox">
+        <button class="navLink">My Wallet</button>
+      </div>
+      <div class="arrow"></div>
+      <div class="navBox">
+        <button class="navLink" (click)="newlogOut()">Log out</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #contentModal let-modal>
+  <div class="modal-header p-2 pb-0">
+    <button type="button" class="close border-hover" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-header modal-title">
+    <h4>LOW ON BTY?</h4>
+  </div>
+  <div class="modal-body modal-body-text">
+    <p>You are using Bettery prototype application running in a simulated enviroment with simulated funds. If you need
+      more BTY, we can deposit you any amount - just ask us on Telegram!</p>
+  </div>
+  <div class="btn-modal">
+    <button type="button" (click)="modal.close('Close click')">GET MORE BTY</button>
+  </div>
+  <div class="modal-a"><a href="#">Learn more about how Bettery works</a></div>
+</ng-template>
+
+<app-spinner-loading *ngIf="openNavBar" [withoutSpinner]="true"></app-spinner-loading>

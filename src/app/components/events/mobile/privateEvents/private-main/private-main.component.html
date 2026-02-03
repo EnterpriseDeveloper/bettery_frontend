@@ -1,0 +1,219 @@
+<div *ngIf="!badRequest" class="{{condition && counts == 1 && 'bg_img'}} containe ">
+  <div *ngIf="!finised">
+    <ng-container *ngIf="!expertPage">
+      <!--    First page    -->
+      <ng-container class="main" *ngIf="!condition">
+        <div class="title">
+          <h1>WELCOME TO THE EVENT of</h1>
+          <div class="nickName mt-1">
+            <div>
+              <h2>{{data?.host.nickName}}</h2>
+            </div>
+            <div (click)="openSoonModal(soon)" class="img_icon ml-2 mb-1"></div>
+          </div>
+        </div>
+        <div class="question_block" [ngStyle]="this.imgForEvent(data)">
+          <div class="mb-3"><img src="{{data?.host.avatat}}" alt="avatar" referrerpolicy="no-referrer"></div>
+          <div class="question">
+            <h2>{{data?.question}}</h2>
+          </div>
+        </div>
+        <div class="results_block">
+          <div class="winners">
+            <p>Winners: <br>
+              <span>{{data?.winner}}</span>
+            </p>
+          </div>
+          <div class="losers">
+            <div>
+              <p>Losers: <br>
+                <span>{{data?.loser}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="total_friends">
+            <div class="img_green_people"></div>
+            <div><span>{{data?.parcipiantAnswers ? data?.parcipiantAnswers.length : 0}} friends joined </span></div>
+          </div>
+        </div>
+        <div class="hr"></div>
+        <div class="tutorial">
+          <h3>how to participate ?</h3>
+          <div class="tutorials-place">
+            <div>
+              <p class="mb-0" style="font-size: 22px">Gif Tutorials</p>
+              <p class="mb-0">(coming soon)</p>
+            </div>
+          </div>
+        </div>
+        <div class="btn_join pb-2">
+          <button (click)="changePage()">JOIN</button>
+        </div>
+        <div class="privacy-text"><p routerLink="/privacy-policy">Privacy Policy</p></div>
+      </ng-container>
+      <div id="up1" *ngIf="condition">
+        <ng-container *ngIf="counts == 1">
+          <div *ngIf=" displayTime() && hideBtn && hideTitle" class="blue-text">Thank you for playing!</div>
+          <div *ngIf="!hideBtn && hideTitle" class="now_batting__title">
+            <div *ngIf="displayTime()">
+              <div class="img_yellow_hand"></div>
+              <div>Now Betting</div>
+            </div>
+            <div *ngIf="!displayTime()">
+              <div class="img_yellow_check"></div>
+              <div>NOW VALIDATING</div>
+            </div>
+          </div>
+          <div class="event_ends">
+            <div *ngIf="displayTime()">
+              <div *ngIf="!hideTitle" class="blue-text">Thank you for playing!</div>
+              Betting ends in <b>{{allTime.day}}:{{allTime.hour}}:{{allTime.minutes}}:{{allTime.seconds}}</b>
+            </div>
+            <div *ngIf="!displayTime() && hideBtn">
+              <div *ngIf="hideTitle" class="blue-text">Thank you for playing!</div>
+              Betting is over. Waiting for Expert...
+            </div>
+
+            <div *ngIf="!displayTime() && !hideBtn">Time left to validate <b>{{allTime.day}}:{{allTime.hour}}
+              :{{allTime.minutes}}:{{allTime.seconds}}</b></div>
+          </div>
+          <div class="question_second">
+            <div class="question_text">
+              <p>{{data?.question}}</p>
+            </div>
+          </div>
+
+          <div class="answers">
+            <ng-container>
+              <div class="answers_item" *ngFor="let a of data?.answers; index as i">
+                <li class="corectir" [ngClass]="{
+                  'participated': i == participatedIndex
+               }">
+                  <div style="padding-right: 20px">{{a}}</div>
+
+                  <div class="partBoxAvatar">
+                    <div *ngIf="participatedIndex == i">
+                      <div class="top-7px ">
+                        <img class="partImg" referrerpolicy="no-referrer" src="{{userData?.avatar}}">
+                      </div>
+                    </div>
+                  </div>
+
+                </li>
+              </div>
+            </ng-container>
+            <div class="resolution_details" *ngIf="data?.resolutionDetalis != 'undefined' && data?.resolutionDetalis.length != 0">
+              How to verify: <span>{{data?.resolutionDetalis}}</span>
+            </div>
+            <div>
+              <div class="winner_get">
+                <div class="winner_get_left">
+                  <div class="winner_get_left_top"><span>WINNERS:</span> <span class="winner_get_right_top"> {{data?.winner}}</span></div>
+                  <div style="display: flex; justify-content: space-between"><span>LOSERS:</span> <span class="winner_get_right_bottom"> {{data?.loser}}</span></div>
+                </div>
+              </div>
+            </div>
+            <ng-container>
+              <div class="hr"></div>
+              <div class="create_by textWhite">
+                <div class="create_by__item">
+                  <div class="left pt-1">
+                    <p>CREATED BY:</p>
+                  </div>
+                  <div class="right">
+                    <div><span>{{data?.host.nickName}}</span></div>
+                    <div class="ml-1"><img src="{{data?.host.avatat}}" alt="avatar1" referrerpolicy="no-referrer"></div>
+                  </div>
+                </div>
+
+                <div class="create_by__item">
+                  <div class="left">
+                    <p>PLAYERS JOINED:</p>
+                  </div>
+                  <div class="partBox">
+                    <div *ngFor="let part of data?.parcipiantAnswers; index as i">
+                      <div [ngStyle]="getPartPos(i)">
+                        <img *ngIf="i <= 3" class="partImg" referrerpolicy="no-referrer" src="{{part.avatar}}">
+                      </div>
+                    </div>
+                    <div class="pt-2 pl-2"><p
+                      class="name playersNumber">{{data?.parcipiantAnswers ? data?.parcipiantAnswers.length : 0}}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="create_by__item margin-40">
+                  <div class="left">
+                    <p>EXPERT:</p>
+                  </div>
+                  <div class="right">
+                    <span class="pink ml-1">Joins after betting ends</span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!hideBtn">
+                <div>
+                  <ng-container *ngIf="expert">
+                    <div class="btn_join_as_player">
+                      <button (click)="nextPage()"> JOIN AS PLAYER</button>
+                    </div>
+                    <div>
+                      <div class="whats_player"><a (click)="modalAboutPlayers()">Whats is a Player?</a></div>
+                    </div>
+                    <div class="btn_join_expert">
+                      <button (click)="onExpertPage()"> BECOME AN EXPERT</button>
+                    </div>
+                    <div>
+                      <div class="whats_expert"><a (click)="modalAboutExpert()">What is an Expert?</a></div>
+                    </div>
+                  </ng-container>
+                </div>
+
+                <div *ngIf="!expert">
+                  <div class="btn_join_expert">
+                    <button (click)="onExpertPage()">VALIDATE EVENT</button>
+                  </div>
+                  <div>
+                    <div class="whats_expert"><a (click)="modalAboutExpert()">What is an Expert?</a></div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!hideBtn && hideTitle" class="hr"></div>
+            </ng-container>
+
+            <div *ngIf="hideBtn" class="aboutBox">
+              <p class="byLink">share event with friends!</p>
+              <a class="link" href="#">www.bettery.io/private_event/{{data?.id}}</a>
+              <div class="imgBox" (click)="copyToClickBoard()">
+                <div class="listImg" style="margin-right: 8px"></div>
+                <p class="copyToClick">Copy to clipboard</p>
+                <div class="copied" [ngClass]="copyLinkFlag && 'showLink'">Link copied!</div>
+              </div>
+            </div>
+
+            <app-comment class="deep-comment" *ngIf="data" [mobile]="true" [theme]=themeChat [userData]=userData
+                         [id]="data?.id"></app-comment>
+
+          </div>
+        </ng-container>
+      </div>
+      <app-private-form *ngIf="counts==2" [data]="data" (changed)="onChanged($event)"></app-private-form>
+    </ng-container>
+    <app-private-expert *ngIf="expertPage" [data]="data" [allTime]="allTime" [ifTimeValid]="ifTimeValid"
+                        (changed)="onChanged($event)"
+                        (changed2)="onChanged2($event)" (back)="returnWithStatus($event)"></app-private-expert>
+  </div>
+</div>
+<app-bad-request *ngIf="badRequest"></app-bad-request>
+
+<app-private-end-event [eventData]="data" *ngIf="finised"></app-private-end-event>
+
+<ng-template #soon let-modal>
+  <button type="button" class=" soonClose close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="modal-body">
+    <p class="title-soon">Coming Soon</p>
+    <p class="text-soon">In the next updates, you can check more details about the event host here.</p>
+  </div>
+</ng-template>

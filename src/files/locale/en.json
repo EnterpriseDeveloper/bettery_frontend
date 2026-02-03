@@ -1,0 +1,209 @@
+{
+  "NAVBAR": {
+    "ITEM_1": "Social Betting",
+    "ITEM_2": "Get Started",
+    "ITEM_3": "Why Bettery",
+    "ITEM_4": "Token Sale",
+    "ITEM_5": "Roadmap",
+    "ITEM_6": "Team",
+    "ITEM_7": "Business Demo",
+    "ITEM_8": "Blog",
+    "ITEM_9": "FAQ",
+    "ITEM_10": "Telegram",
+    "ITEM_11": "Docs",
+    "ITEM_12": "Twitter",
+    "ITEM_13": "Linkedin"
+  },
+  "HEADER": {
+    "TITLE_PART_1": "Bring Everyone Together",
+    "TITLE_PART_2": "on what matters to you",
+    "TEXT": "Feature an event that matters to your friends or community, and let everyone bet or say the truth.",
+    "HEADER_QUESTION": "What will be the weather tomorrow in ",
+    "QUESTION_END": "Saigon?",
+    "BUTTON_TEXT": "LAUNCH APP",
+    "OR_JOIN": {
+      "1": "or Join Bettery events",
+      "2": "events"
+    },
+    "JOIN": "Join",
+    "TOP_QUESTIONS": [
+      "Which team will win El Clásico at 3am tonight?",
+      "What will be the weather tomorrow in Saigon?",
+      "When will the corona virus end?"
+    ],
+    "TOP_PLACEHOLDER": "Please input your questions ...",
+    "POPOVER": {
+      "1": "Have something unpredictable",
+      "2": "happening soon? Ask here and,",
+      "3": "click Create Event to bet on it",
+      "4": "with friends!"
+    }
+  },
+  "SECOND": {
+    "TITLE": "Social Betting is Fun",
+    "TEXT_1": "Have fun betting on the future that’s just yours in private events with friends or publicly with online communities on any social media content.",
+    "TEXT_2": " Start with free tokens, earn when taking risk or not, and cash out anytime.",
+    "TEXT_3": "Play to earn, always for free!",
+    "CARD_TITLE_1": "Influencers",
+    "CARD_TITLE_2": "On My Own",
+    "CARD_TITLE_3": "Friends",
+    "CARD_TEXT_1": "Engage with followers in social media. Turn your content interactive and create conversations.",
+    "CARD_TEXT_2": "Join public events as an expert to say the truth, or create viral events for Bettery community.",
+    "CARD_TEXT_3": "Bet a dinner or free tokens on personalized topics you all care and love, publicly or in private."
+  },
+  "THIRD": {
+    "TITLE": "Go Risky, or Risk-Free",
+    "TEXT": "Create your own events and invite friends or social media to join.",
+    "TEXT_2": "Bet with free tokens to cash out wins or receive a friend’s promise.",
+    "TEXT_3": "Validate the outcome as expert of truth after betting is over.",
+    "TEXT_4": "Advise viral event topics for others and earn from your creativity.",
+    "TEXT_5": "Pick a role that fits your day and start earning for free!"
+  },
+  "FOUR": {
+    "TITLE": "Why Bettery?",
+    "TEXT_1": "Bet with your opinion and skills - not luck - using free BET tokens and earn while enjoying your hobby. Cash out earnings but never run out of BET when losing in events. Grow reputations and earn extra in Pemium and Pro events hosted by businesses and influencers.",
+    "TEXT_2": "To ensure that no one, not even Bettery team can manipulate events or user balance, Bettery is the first social application with its logic entirely executed on Smart Contracts and events data stored in a tamper-proof storage, and only users can access their own registered wallets.",
+    "CARD_TITLE_1": "Uncompromised Outcomes",
+    "CARD_TITLE_2": "Trustless Knowledge",
+    "CARD_TITLE_3": "Free-to-Play-To-Earn ",
+    "CARD_TITLE_4": "Truly Personalized",
+    "CARD_TEXT_1": "Events data and funds stored on Smart Contracts can never be altered by anyone, not even Bettery.",
+    "CARD_TEXT_2": "User reputation is a trustless \"proof-of-knowledge\" for businesses paying to engage with “pro” users.",
+    "CARD_TEXT_3": "Start with free Tokens and earn more as your reputations grow in business-made events.",
+    "CARD_TEXT_4": "Create or join in topics that matter to you in public or private rooms, and play risky or risk-free."
+  },
+  "TOKEN_SALE": {
+    "TITLE": "Bettery Token Sale",
+    "TEXT": "Bettery users join events for free to earn BET tokens, which can be swapped into BTY tokens and sold on exchanges. To engage high-profile users, Hosts can use BTY as reward for participants in Premium and Pro events. BTY and BET are key components of the Bettery Tokenomy. \n\n",
+    "TEXT_2": "Early Hosts and Investors can purchase BTY through Bettery Token Sale",
+    "JOIN_TOKEN_SALE": "Join Token Sale",
+    "MORE_ON_BETTERY": "More on Bettery tokenomy",
+    "FULL_TOKENOMICS": "Bettery full tokenomics will be launched in:"
+  },
+  "ROADMAP": {
+    "TITLE": "Roadmap",
+    "TEXT_1": "All our development activities - past, present, and future - are always available to the public in our detailed ",
+    "TEXT_2": " product roadmap",
+    "TEXT_3": ".",
+    "DATE_1": "Q4 - 2021",
+    "DATE_2": "Q1 - 2022",
+    "DATE_3": "Q2 - 2022",
+    "DATE_4": "Q3/Q4 - 2022",
+    "ROADMAP_UP_TEXT-1": "Web App & Tokenomics",
+    "ROADMAP_UP_TEXT-2": "Mobile Application",
+    "ROADMAP_UP_TEXT-3": "  Social Media Integration",
+    "ROADMAP_UP_TEXT-4": "Knowledge Marketplace",
+    "ROADMAP_TEXT-1": "Web App.",
+    "ROADMAP_TEXT-1.1": "Token Economics.",
+    "ROADMAP_TEXT-1.2": "BTY Token Sale.",
+    "ROADMAP_TEXT-2": "Mobile Application.",
+    "ROADMAP_TEXT-2.1": "Premium & Pro Events.",
+    "ROADMAP_TEXT-2.2": "BET - BTY Swap.",
+    "ROADMAP_TEXT-3": "Advisor & Moderator.",
+    "ROADMAP_TEXT-3.1": "Appealing in Events.",
+    "ROADMAP_TEXT-3.2": "Bettery NFTs.",
+    "ROADMAP_TEXT-4": "BET Farming.",
+    "ROADMAP_TEXT-4.1": "Fiat in Pro Events.",
+    "ROADMAP_TEXT-4.2": "Circles of Friends."
+  },
+  "TEAM": {
+
+    "TEXT": "Bettery is a platform for enthusiasts, built by enthusiasts. Our humble yet passionate team consists of experts with mastery in distributed systems, creative design, and most importantly, satisfactory user experience.",
+    "NAME_7": "Allan",
+    "STATUS_7": "Strategic Advisor",
+    "EXPERTISE": "Experience:",
+    "PASSION": "Passion:",
+    "FEDOR": {
+      "NAME": "Fedor",
+      "STATUS": "Product Owner, Founder",
+      "EXPERTISE": "Synergize software development and international B2B sales, worked with the team for years before starting Bettery.",
+      "PASSION": "Ownerless Business, Smart Devices."
+    },
+    "SIM": {
+      "NAME": "Sim",
+      "STATUS": "Business Analyst",
+      "EXPERTISE": "Know what users want based on his previous experience running a mining farm and moderating Facebook content.",
+      "PASSION": "Countrysides, Yachts. "
+    },
+    "MAXIM": {
+      "NAME": "Maxim",
+      "STATUS": "Development Lead & Co-Founder",
+      "EXPERTISE": "Fuel the life force of Bettery platform through his deep knowledge of the innerworkings of blockchain infrastructures.",
+      "PASSION": "Blockchain Programming."
+    },
+    "SHANE": {
+      "NAME": "Shane",
+      "STATUS": "Content Marketer",
+      "EXPERTISE": "Transform endless walls of text into user-friendly and meaningful content that you’ll have a blast reading.",
+      "PASSION": "Writing, Literary Analysis, Gaming."
+    },
+    "NELSON": {
+      "NAME": "Nelson",
+      "STATUS": "UX/UI Designer",
+      "EXPERTISE": "Transform rough wireframe sketches into vivid, intuitive interfaces and designs you’ll never grow tired of using.",
+      "PASSION": "Technology, Sports, Gaming."
+    },
+    "ANDREY": {
+      "NAME": "Andrey",
+      "STATUS": "Full-stack Developer",
+      "EXPERTISE": "Give life to ideas and designs mapped out on graphics editors and Powerpoint slides with the power of coding.",
+      "PASSION": "Blockchain Programming"
+    },
+    "JOIN_US_NOW": {
+      "NAME": "Join Us Now",
+      "STATUS": "Bettery Team",
+      "TEXT": "We’re looking for skilled enthusiasts to help us realize our vision to bring value to people’s opinion shaped by their unique life experiences through social betting."
+    },
+    "KEN": {
+      "NAME": "Ken Graham",
+      "STATUS": "Legal Advisor",
+      "EXPERTISE": " Evolving regulations of blockchain and cryptocurrency, turning risky into riskless and bring forth its value to the public.",
+      "PASSION": "World Affairs, Video Games"
+    },
+    "ALLAN":  {
+      "NAME": "Allan Ta",
+      "STATUS": "Strategic Advisor / Roseon Finance",
+      "EXPERTISE": "Applying strategic mind to guide aspiring teams in delivering innovative and market-demanded Blockchain products.",
+      "PASSION": "Entrepreneurship"
+    },
+    "GHEEHOE":  {
+      "NAME": "GheeHoe Cheng",
+      "STATUS": "Strategic Advisor / Perspectiv Ventures",
+      "EXPERTISE": "Investing in early-stage startups in green, health, and blockchain economy via strategic ecosystem building blocks. ",
+      "PASSION": "Entrepreneurship"
+    }
+  },
+  "FORM": {
+    "TITLE": "Are you an Influencer?",
+    "TEXT": "We’ll show you how to boost engagement with your followers with every piece of your content, hands-on based right on what matters to you.",
+    "FIRST_NAME": "How we may call you?",
+    "NAME": "Name",
+    "LAST_NAME": "Last Name",
+    "EMAIL": "Email",
+    "PHONE_NUMBER": "Best way to contact you (Telegram, Whatsapp, etc.)",
+    "FIRM": "Your channel (Where to boost engagements, a public channel)",
+    "VALIDATOR": "this field is required",
+    "EMAIL_ERROR": "this is not email",
+    "BUTTON_TEXT": "Book a Demo"
+  },
+  "FOOTER": {
+    "TITLE_1": "About Bettery",
+    "TITLE_2": "Stay in touch",
+    "TEXT_1": "Bettery is a social pool betting platform for friends and online communities to have fun on what matters to you. Through betting events, collective social knowledge is created for businesses and influencers, while users earn from their opinions.",
+    "TEXT_2": "No spam. No ads. Just valuable content that’s a pleasure to read.",
+    "BUTTON_TEXT": "Subscribe",
+    "BUTTON_TEXT_2": "You're in!",
+    "PLACE_HOLDER": "Enter email address"
+  },
+  "MODAL": {
+    "TITLE": "For Investors",
+    "TEXT": "Shared experiences bring people together, not just past memories",
+    "TEXT-2": "- this is why we create Bettery. Our team is happy to discuss opportunities with startup investors who share our vision.",
+    "DOWNLOAD": "Download"
+  },
+  "LANGUAGES": {
+    "EN": "English",
+    "VN": "Vietnam",
+    "TITLE": "Language"
+  }
+}

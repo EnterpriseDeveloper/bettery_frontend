@@ -1,0 +1,285 @@
+<div #div class="card_box room-card" id="{{'id-'+question.id}}">
+
+
+  <div class="copied" [ngClass]="copyLinkFlag && 'showLink'">Link copied!</div>
+  <div class="row ml-0" style="margin-right: -30px; min-height: 212px; flex-wrap: nowrap;">
+
+    <div class=" imageBox imgFix " (mouseenter)="toggleShowIcon(true)" (mouseleave)="toggleShowIcon(false)" style="padding: 0; align-items: center; height: 227px" *ngIf="question.thumImage === 'undefined'" [ngStyle]="colorForRoom(question.thumColor)">
+      <div *ngIf="question.thumImage === 'undefined'" class="unloadedImgBlock">
+        <div class="clickCopy" *ngIf="showCopyIcon" (click)="copyToClickBoard( $event , question?.id)">
+          <div class="copyLink-img"></div>
+        </div>
+        <div  class="unloadedImgContent">
+          <span class="unloadedImgQuestion">{{question?.question}}</span>
+        </div>
+      </div>
+    </div>
+    <div class=" imageBox imgFix"  (click)="open()"
+         (mouseenter)="toggleShowIcon(true)" (mouseleave)="toggleShowIcon(false)" *ngIf="question.thumImage !== 'undefined'">
+      <div class="clickCopy" *ngIf="showCopyIcon" (click)="copyToClickBoard($event ,question?.id)">
+        <div class="copyLink-img"></div>
+      </div>
+      <div *ngIf="question.thumFinish!=='undefined' && showClearIcon" class="show-final-image-block" (click)="toggleImage($event)">
+        <div class="show-final-image" ></div>
+      </div>
+      <img class="event_img" #eventImage src="{{question.thumFinish == 'undefined' ? question.thumImage : question.thumFinish}}" [ngStyle]="imageHeight()" />
+    </div>
+
+    <div class="body_card" [ngStyle]="roomCardBottom()" id="{{question.id}}">
+      <div>
+        <div class="room-card-top" [ngStyle]="cardColorBackGround(question)">
+          <div style="max-width: 70%">
+            <h2>{{question?.question}}</h2>
+            <div class="questions-box" *ngIf="!joinPlayer && !becomeExpert">
+              <div class="answers_box">
+                <div class="answers">
+                  <div *ngIf="!finalAnswerGuard(question)">
+                    <div class="d-flex align-items-center" [ngClass]="answersStructure()">
+                      <div class="each_answer" [ngClass]="answersStructure() == 'in_row_6' && 'col-4'" *ngFor="let answer of question.answers; let i = index">
+                        <input class="checkbox_answer" id="{{question.id}}{{i}}" (click)="this.makeAnswer(i, answer)"
+                          value="{{i}}" type="radio" name="{{question.id}}">
+                        <label for="{{question.id}}{{i}}" class="label answer-checkbox" style="cursor: pointer">{{answer}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="finalAnswerGuard(question)">
+                    <div class="d-flex align-items-center" *ngIf="question.status.includes('reverted')" [ngClass]="answersStructure()">
+                      <div class="each_answer" *ngFor="let answer of question.answers; let i = index" [ngClass]="answersStructure() == 'in_row_6' && 'col-4'">
+                        <div class="cycle"></div>
+                        <div class="label answer-checkbox">{{answer}}</div>
+                      </div>
+                    </div>
+                    <div class="d-flex" *ngIf="question.finalAnswer !== null" [ngClass]="answersStructure()">
+                      <div class="each_answer" *ngFor="let answer of question.answers; let i = index" [ngClass]="answersStructure() == 'in_row_6' && 'col-4'">
+                        <div>
+                          <div [ngClass]="{'win_img': question.finalAnswer == i}"></div>
+                          <div [ngClass]="{'cycle': question.finalAnswer != i && this.myAnswers?.answer != i}"></div>
+                          <div class="display"
+                            [ngClass]="{'lost_box': userData && question.finalAnswer != this.myAnswers?.answer && this.myAnswers?.answer == i}">
+                            <div class="lost_img"></div>
+                          </div>
+                        </div>
+                        <div class="label answer-checkbox"
+                          [ngClass]="{'win_text': question.finalAnswer == i, 'lost_text': userData &&  question.finalAnswer != this.myAnswers?.answer && this.myAnswers?.answer == i}">
+                          {{answer}}</div>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center"
+                      *ngIf="this.myAnswers?.answer !== undefined && question.finalAnswer == null && !question.status.includes('reverted')" [ngClass]="answersStructure()">
+                      <div class="each_answer" [ngClass]="answersStructure() == 'in_row_6' && 'col-4'" *ngFor="let answer of question.answers; let i = index">
+                        <div class="cycle">
+                          <div *ngIf="this.myAnswers?.answer == i"
+                            [ngClass]="{'cyclePart': this.myAnswers?.from == 'participant', 'cycleValid': this.myAnswers?.from == 'validator'}">
+                          </div>
+                        </div>
+                        <div class="label answer-checkbox">{{answer}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="min-width: 126px">
+            <div class="timer-span" *ngIf="question.finalAnswer === null && !question.status.includes('reverted') ">
+              <div style="display: flex; width: 100%; white-space: pre; position: relative">
+                <div style="position: absolute; left: 35px" *ngIf="!timeValidating(question)">
+                  ({{this.getValidatorsAmount(question)}}/{{getValidatorsAmountLeft(question)}})</div>
+                <time class="w-100" [timer]="question?.endTime"></time>
+              </div>
+            </div>
+            <div *ngIf="question.finalAnswer !== null">
+              <p class="status_text">Ended on {{eventFinishDate(question)}}</p>
+            </div>
+            <div *ngIf="question.status.includes('reverted')">
+              <p class="status_text">Cancelled on {{eventFinishDate(question)}}</p>
+            </div>
+            <div *ngIf="!joinPlayer && !becomeExpert">
+              <div style="margin-top: 34px" *ngIf="!finalAnswerGuard(question)">
+                <div  [formGroup] = "form" *ngIf="timeValidating(question)">
+                  BET <input  (keydown)="filterKeyCode($event)"    (input)="updateValue()" min="0" type="number" step="0.01" [formControlName]="'quickBet'" class="bet-style" />
+                  <span
+                    (click)="this.setAnswer('participate')" class="quickBet"
+                    [ngClass]="this.disable == this.index && 'quickBetDisabled'"
+                >QUICK BET</span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="question.status.includes('reverted')" class="clear">
+              <p class="notExperts">{{statusReverted(question)}}</p>
+            </div>
+            <div class="amount_box " style="align-items: flex-end"
+              *ngIf="this.myAnswers?.answered && this.myAnswers?.betAmount > 0 && question.finalAnswer === null && !question.status.includes('reverted')">
+              <div style="display: flex; flex-direction: column; align-items: flex-end; width: 100px">
+                <div class="amount_img"></div>
+                <p class="amountText">{{this.myAnswers?.betAmount}} BET</p>
+              </div>
+            </div>
+            <div class="amount_box" style="align-items: flex-end"
+              *ngIf="this.myAnswers?.answered && this.myAnswers?.from == 'validator' && question.finalAnswer === null && !question.status.includes('reverted')">
+              <div style="display: flex; flex-direction: column; justify-content: center; width: 100px">
+                <div class="validated"></div>
+                <p class="validated_text">VALIDATED</p>
+              </div>
+            </div>
+            <div class="amount_box" [ngClass]="question?.host.id === userData?._id && 'earnedHost'" style="padding-right: 1px"
+
+                 *ngIf="userData && question.finalAnswer !== null && this.myAnswers?.answer != question.finalAnswer  ">
+              <div *ngIf="question?.host.id === this.userData?._id" class="blockWin blockWinHost">
+                <p class="winner_text">You earned</p>
+                <p class="winner_amount" [ngStyle]="getWinnerColor(question)">{{hostEarned(question)}}</p>
+                <p style="text-align: center">As <span style="color: #FFD300">Host</span></p>
+              </div>
+
+              <div  class="hrHost" [ngClass]="question?.host.id === this.userData?._id && 'd-block'" *ngIf="myAnswers?.answered"></div>
+
+              <div class="blockWin" [ngClass]="question?.host.id === userData?._id && 'wonHost'" *ngIf="myAnswers?.answered">
+                <p class="lost_text2">You lost</p>
+                <p class="lost_amount">{{getLost(question)}} BET</p>
+                <p *ngIf="question?.host.id === this.userData?._id && this.myAnswers.from !== 'validator'" style="text-align: center; font-weight: bold">As <span style="color: #34DDDD">Player</span></p>
+              </div>
+            </div>
+            <div class="amount_box"
+              *ngIf="question?.finalAnswer !== null && this.myAnswers?.answer != question?.finalAnswer && this.myAnswers?.answer != undefined && this.myAnswers?.from == 'validator' && this.myAnswers?.answered">
+             <div style="display: flex; flex-direction: column; justify-content: center;">
+               <p class="lost_text2">You were</p>
+               <p class="lost_amount">WRONG</p>
+             </div>
+            </div>
+            <div class="amount_box" [ngClass]="question?.host.id === userData?._id && 'earnedHost'" style="width: 100%"
+              *ngIf="question?.finalAnswer !== null && this.myAnswers?.answer == question?.finalAnswer && this.myAnswers?.answer != undefined && this.myAnswers?.answered">
+              <div *ngIf="question?.host.id === this.userData?._id" class="blockWin blockWinHost">
+                <p class="winner_text">You earned</p>
+                <p class="winner_amount" [ngStyle]="getWinnerColor(question)">{{hostEarned(question)}}</p>
+                <p style="text-align: center; font-weight: bold">As <span style="color: #FFD300">Host</span></p>
+              </div>
+
+              <div  class="hrHost" [ngClass]="question?.host.id === this.userData?._id && 'd-block'"></div>
+
+              <div class="blockWin" [ngClass]="question.host.id === userData?._id && 'wonHost'">
+                <p class="winner_text">{{actionDetected()}}</p>
+                <p class="winner_amount" [ngStyle]="getWinnerColor(question)">{{playerAward()}}</p>
+                <p *ngIf="question?.host.id === this.userData?._id && this.myAnswers.from !== 'validator'" style="text-align: center; font-weight: bold">As <span style="color: #34DDDD">Player</span></p>
+                <p *ngIf="question?.host.id === this.userData?._id && this.myAnswers.from == 'validator'" style="text-align: center; font-weight: bold">As <span style="color: #BF94E4">Expert</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="room-card-bottom" *ngIf="!joinPlayer && !becomeExpert">
+          <div class="room-info-list" *ngIf="question?.finalAnswer === null && !question?.status.includes('reverted')">
+            <div *ngIf="!joinRoom" class="info-item">
+              <div class="avatar mr-2">
+                <img src="{{question?.host.avatat}}" alt="avatar">
+              </div>
+              <div class="hostName" style="color: #54DD96;">{{makeShortenStr(question?.host.nickName, 16)}}</div>
+            </div>
+            <div class="info-item">
+              <div class="yellow-parc-img mr-2 ml-3"></div>
+              <div><span>{{question?.validated + question?.answerAmount}}</span> Joined</div>
+            </div>
+            <div class="info-item">
+              <div class="bet-img mr-2 ml-3"></div>
+              <div><span>{{avgBet(question)}} BET</span> Avg. Bet</div>
+            </div>
+            <div style="cursor: pointer" routerLink="/room/{{question?.room.id}}" *ngIf="!joinRoom" class="info-item">
+              <div class="colorRoom mr-2 ml-3 " [ngStyle]="colorForRoom(question.room.color)"></div>
+              <div><span>{{makeShortenStr(question?.room.name, 16)}}</span> ({{question?.room.eventAmount}})</div>
+            </div>
+          </div>
+          <div *ngIf="question.status.includes('reverted')" class="refund_box_info">
+            <div style="margin-left:60px;">
+              <div class="yellow-parc-img icon_refund" style="margin-left: 23px;"></div>
+              <div class="info_text"><b>{{question?.validated + question?.answerAmount}}</b> Subscribed</div>
+            </div>
+            <div style="margin-left:60px;">
+              <div class="bet-img icon_refund" style="margin-left: 14px;"></div>
+              <p class="info_text">Refunded</p>
+            </div>
+          </div>
+          <div *ngIf="question.finalAnswer !== null" class="refund_box_info justify-content-between" style="padding-bottom: 12px;">
+            <div class="d-flex">
+            <div style="margin-left:40px;">
+              <div class="yellow-parc-img icon_refund" style="margin-left: 23px;"></div>
+              <div class="info_text"><b>{{question?.validated + question?.answerAmount}}</b> Subscribed</div>
+            </div>
+            <div style="margin-left:40px;">
+              <div class="corona-img icon_refund" style="margin-left: 50px;"></div>
+              <div class="info_text"><b>{{biggestWin(question)}} BET</b> Biggest Win</div>
+            </div>
+            <div style="margin-left:40px;">
+              <div class="prize-pool-img icon_refund" style="margin-left: 35px;"></div>
+              <div class="info_text"><b>{{getPool(question)}} BET</b> Prize Pool</div>
+            </div>
+            <div style="margin-left:40px;">
+              <div class="minted-img icon_refund" style="margin-left: 28px;"></div>
+              <div class="info_text"><b>{{getMinted(question)}} BET</b> Minted</div>
+            </div>
+          </div>
+            <div class="mr-5" *ngIf="question.finalAnswer !== null && this.myAnswers?.answer != question.finalAnswer && this.myAnswers?.answer != undefined && this.myAnswers?.from == 'validator' && this.myAnswers?.answered">
+              <div class="expertMinus-img icon_refund" style="margin-left: 28px;"></div>
+              <div class="expertMinus_text">-1 Expert Rep</div>
+            </div>
+          </div>
+          <div class="room-comment row">
+            <div class="col-8 d-flex maxFix">
+              <div class="comment-img mr-2"></div>
+              <div *ngIf="question?.lastComment === 'null'" class="comment-text">
+                No comments yet. <span class="leave_comment" (click)="getCommentById(question?.id)">(leave a
+                  comment)</span>
+              </div>
+              <div *ngIf="question?.lastComment !== 'null'" class="comment-text">
+                <p>
+                  {{question?.lastComment}} <span (click)="getCommentById(question?.id)">(see
+                    {{question?.commentsAmount}}
+                    more comments)</span>
+                </p>
+              </div>
+            </div>
+            <div *ngIf="!finalAnswerGuard(question)">
+              <div class="button" *ngIf="timeValidating(question)" (click)="this.openDetails()" style="display: flex;">
+                join now <div
+                  [ngClass]="{arrow_up_yellow: this.openIndex == this.index, arrow_down_yellow: this.openIndex != this.index}">
+                </div>
+              </div>
+              <div *ngIf="!timeValidating(question) && question?.host.id != userData?._id" class="validateNow" (click)="this.openDetails()"
+                style="display: flex;">
+                VALIDATE NOW <div
+                  [ngClass]="{arrow_up_purple: this.openIndex == this.index, arrow_down_purple: this.openIndex != this.index}">
+                </div>
+              </div>
+            </div>
+            <div class="viewEvent" *ngIf="finalAnswerGuard(question)" (click)="this.viewDetails()"
+              [ngStyle]="{'cursor': !question.status.includes('reverted') ? 'pointer' : 'default'}">
+              VIEW EVENT <div *ngIf="!question.status.includes('reverted')"
+                [ngClass]="{arrow_up_grey: this.openIndex == this.index, arrow_down_grey: this.openIndex != this.index}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="this.openIndex == this.index">
+        <quiz-choose-role *ngIf="!joinPlayer && !becomeExpert && !viewEventFinishInfo" [question]="question"
+          (player)="joinAsPlayer()" (expert)="becomeValidator()"></quiz-choose-role>
+        <div *ngIf="joinPlayer || becomeExpert">
+          <quiz-info *ngIf="details && !letsBet" (goBack)="cancel()" (agree)="continue()" [joinPlayer]="joinPlayer"
+            [becomeExpert]="becomeExpert"></quiz-info>
+          <quiz-action [allUserData]="allUserData" (goBack)="goToInfo()" (betEvent)="betEvent($event)"
+            (validateEvent)="validateEvent($event)" [joinPlayer]="joinPlayer" [becomeExpert]="becomeExpert"
+            *ngIf="!details && letsBet" [question]="question" [isDisableValid]="validDisable" [isDisableBet]="betDisable">
+          </quiz-action>
+        </div>
+        <quiz-event-finish *ngIf="viewEventFinishInfo" [question]="question" [userData]="userData"
+          [myAnswers]="myAnswers" [joinRoom]="joinRoom"></quiz-event-finish>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div class="shadow" *ngIf="isShowImage" >-->
+
+<!--</div>-->
+<!--<div class="modal-content-zoom imageMove" [ngClass]="isShowImage && 'show-image-modal'" >-->
+<!--  <img class="imageOnMove" [src]="question.thumImage"  alt="">-->
+<!--</div>-->
+

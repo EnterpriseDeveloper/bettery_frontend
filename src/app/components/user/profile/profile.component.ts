@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../app.state";
@@ -24,7 +24,7 @@ import { MyReferralsComponent } from "../my-referrals/my-referrals.component";
     MyReferralsComponent,
   ],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnDestroy {
   storeUserSubscribe: Subscription;
   userData: User = undefined;
 
@@ -52,8 +52,6 @@ export class ProfileComponent implements OnInit {
         }
       });
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy() {
     if (this.storeUserSubscribe) {

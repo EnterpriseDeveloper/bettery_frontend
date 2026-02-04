@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ClipboardService } from "ngx-clipboard";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModule } from "@angular/common";
@@ -23,9 +23,6 @@ export class ProfileSeedModalComponent implements OnInit {
     private activeModal: NgbActiveModal,
   ) {}
 
-  @HostListener("document:keyup.escape") onKeydownHandler() {
-    this.closeModal();
-  }
   ngOnInit(): void {
     if (this.seedPhrase) {
       this.splitSeedPhrase(this.seedPhrase);

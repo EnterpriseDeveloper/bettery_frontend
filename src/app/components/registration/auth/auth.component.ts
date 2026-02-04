@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { PostService } from "../../../services/post.service";
 import { Store } from "@ngrx/store";
@@ -25,7 +25,7 @@ import { SpinnerLoadingComponent } from "../../share/both/spinners/spinner-loadi
     SpinnerLoadingComponent,
   ],
 })
-export class AuthComponent implements OnInit, OnDestroy {
+export class AuthComponent implements OnDestroy {
   spinner = true;
   webAuth: any;
   loginSub$: Subscription;
@@ -55,8 +55,6 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.auth0Registration();
     }
   }
-
-  ngOnInit(): void {}
 
   auth0RegistrationWithLink() {
     sessionStorage.removeItem("linkUser");
@@ -166,6 +164,7 @@ export class AuthComponent implements OnInit, OnDestroy {
               if (data) {
                 if (data.walletVerif === "failure") {
                   console.log("need enter seed phrase");
+                  console.log(data.wallet);
                   this.walletFromDB = data.wallet;
                   this.modalStatus = true;
                   this.modalOpen = true;

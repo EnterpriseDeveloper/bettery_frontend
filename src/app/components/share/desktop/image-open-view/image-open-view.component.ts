@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -8,16 +8,6 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class ImageOpenViewComponent {
   @Input() imageSrc: string;
-
-  @HostListener("document:keyup.escape") onKeydownHandler() {
-    const modalBackground = document.getElementsByClassName(
-      "background-modal-none",
-    )[0];
-    if (modalBackground) {
-      modalBackground.classList.remove("background-modal-none");
-      this.activeModal.close();
-    }
-  }
 
   constructor(public activeModal: NgbActiveModal) {}
 }

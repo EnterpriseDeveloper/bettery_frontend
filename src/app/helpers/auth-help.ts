@@ -12,6 +12,7 @@ const authHelp = {
     clientID: environment.clientId,
     responseType: "token id_token",
     redirectUri: `${environment.auth0_URI}/auth`,
+    prompt: "select_account",
   }),
 
   walletInit: async (sub) => {

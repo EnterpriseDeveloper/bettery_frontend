@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../../app.state";
 import { Answer } from "../../../../models/Answer.model";
@@ -194,19 +194,6 @@ export class EventFeedMobileComponent implements OnDestroy {
         (e) => e !== event.index,
       );
     }
-  }
-
-  @HostListener("window:scroll")
-  showHeader() {
-    if (this.prevScrollPos > window.pageYOffset) {
-      document.getElementById("bar_on_hide").className = "block_pos_fix";
-    } else if (
-      this.prevScrollPos < window.pageYOffset &&
-      window.pageYOffset > 150
-    ) {
-      document.getElementById("bar_on_hide").className = "d_none_pos_rel";
-    }
-    this.prevScrollPos = window.pageYOffset;
   }
 
   onScrollQuizTemplate() {

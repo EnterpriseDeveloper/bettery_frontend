@@ -1,6 +1,5 @@
 import {
   Component,
-  HostListener,
   NO_ERRORS_SCHEMA,
   OnDestroy,
   OnInit,
@@ -28,7 +27,6 @@ import { EventsTemplatesDesktopComponent } from "../createEvent/desktop/events-t
 import { SessionStorageService } from "../rooms/sessionStorage-service/session-storage.service";
 import { Router, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { LandingBannerComponent } from "./landing-banner/landing-banner.component";
 import { LandingFormComponent } from "./landing-form/landing-form.component";
 
 @Component({
@@ -42,7 +40,6 @@ import { LandingFormComponent } from "./landing-form/landing-form.component";
     RouterModule,
     ReactiveFormsModule,
     NgxTypedJsModule,
-    LandingBannerComponent,
     LandingFormComponent,
   ],
   schemas: [NO_ERRORS_SCHEMA], // TODO
@@ -133,24 +130,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   open(content) {
     this.modalService.open(content, { centered: true, size: "lg" });
-  }
-
-  @HostListener("click", ["$event"])
-  a($event) {
-    if (this.triggerPopover) {
-      this.triggerPopover = false;
-    }
-
-    if (this.newCreateEvent.trim().length <= 0) {
-      this.active =
-        $event.target.className === "typing" ||
-        $event.target.id === "newEvent" ||
-        $event.target.className === "pencil";
-    }
-
-    if ($event.target.className === "typing") {
-      this.typedCreateEvent = "";
-    }
   }
 
   sendEvent() {

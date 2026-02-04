@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -107,12 +106,6 @@ export class QuizTemplateComponent
           this.reputation = x;
         }
       });
-  }
-
-  @HostListener("window:resize")
-  listenScroll() {
-    this.windowWidth = document.documentElement.clientWidth;
-    this.heightBlock = this.div.nativeElement.clientHeight;
   }
 
   ngAfterViewInit() {

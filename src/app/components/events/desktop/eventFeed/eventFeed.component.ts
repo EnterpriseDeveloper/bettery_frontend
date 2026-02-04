@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../../app.state";
 import { Answer } from "../../../../models/Answer.model";
@@ -195,11 +195,6 @@ export class EventFeedComponent implements OnDestroy {
     } else {
       return { top: 0 };
     }
-  }
-
-  @HostListener("window:scroll")
-  listenScroll() {
-    this.scrollTop = document.documentElement.scrollTop;
   }
 
   onScrollQuizTemplate() {

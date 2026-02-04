@@ -2,7 +2,6 @@ import {
   Component,
   OnDestroy,
   Input,
-  HostListener,
   Output,
   EventEmitter,
 } from "@angular/core";
@@ -53,14 +52,6 @@ export class RegistrationComponent implements OnDestroy {
     this.webAuth = authHelp.init;
   }
 
-  @HostListener("document:keydown", ["$event"]) onKeydownHandler(
-    event: KeyboardEvent,
-  ) {
-    if (event.key === "Escape") {
-      this.activeModal.close();
-    }
-  }
-
   loginWithAuth0(param: string) {
     if (this.linkUser) {
       if (!this.linVerification(param)) {
@@ -68,6 +59,7 @@ export class RegistrationComponent implements OnDestroy {
         param = param === "email" ? null : param;
         this.webAuth.authorize({
           connection: param,
+          prompt: "select_account",
         });
         sessionStorage.setItem("betteryPath", window.location.pathname);
       }

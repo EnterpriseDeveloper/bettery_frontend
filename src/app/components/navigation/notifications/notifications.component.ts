@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  OnDestroy,
-  HostListener,
-  ElementRef,
-} from "@angular/core";
+import { Component, Input, OnInit, OnDestroy, ElementRef } from "@angular/core";
 import { Subscription } from "rxjs";
 import { PostService } from "../../../services/post.service";
 import { NotificationModel } from "../../../models/Notification.model";
@@ -36,13 +29,6 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     private eRef: ElementRef,
     private sessionStorageService: SessionStorageService,
   ) {}
-
-  @HostListener("document:click")
-  public clickout() {
-    if (!this.eRef.nativeElement.contains(event.target)) {
-      this.navbar = false;
-    }
-  }
 
   ngOnInit(): void {
     this.getDataFromDb();

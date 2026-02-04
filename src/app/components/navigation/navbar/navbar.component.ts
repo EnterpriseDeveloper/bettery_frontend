@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  HostListener,
   ViewChild,
   DoCheck,
   ElementRef,
@@ -118,7 +117,6 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 
   async ngOnInit() {
     this.webAuth = authHelp.init;
-    this.onDocumentClick = this.onDocumentClick.bind(this);
   }
 
   depositGuard() {
@@ -174,13 +172,6 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
     this.updateBalance();
   }
 
-  @HostListener("document:click")
-  public clickout() {
-    if (!this.eRef.nativeElement.contains(event.target)) {
-      this.logoutBox = false;
-    }
-  }
-
   async newlogOut() {
     this.webAuth.logout({
       returnTo: `${environment.auth0_URI}/join`,
@@ -202,16 +193,6 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 
   navBar() {
     this.openNavBar = !this.openNavBar;
-  }
-
-  @HostListener("document:click", ["$event"])
-  protected onDocumentClick($event: MouseEvent) {
-    if (this.insideElement) {
-      if (this.insideElement.nativeElement.contains($event.target)) {
-        return;
-      }
-      this.openNavBar = false;
-    }
   }
 
   copyRefLink() {

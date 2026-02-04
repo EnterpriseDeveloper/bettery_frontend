@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { GetService } from "../../../services/get.service";
 import { Subscription } from "rxjs";
 import { PostService } from "../../../services/post.service";
@@ -103,16 +103,6 @@ export class RoomsComponent implements OnInit, OnDestroy {
       queryParams: { page: num, sort: sort, search: search },
       queryParamsHandling: "merge",
     });
-  }
-
-  @HostListener("click", ["$event"])
-  a($event) {
-    if (
-      !$event.target.classList.contains("search-img") &&
-      !$event.target.classList.contains("search-input")
-    ) {
-      this.showInputFlag = false;
-    }
   }
 
   getAllRoomsFromServer() {

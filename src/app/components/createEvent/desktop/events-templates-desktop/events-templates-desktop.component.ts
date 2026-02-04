@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../../app.state";
@@ -106,14 +106,6 @@ export class EventsTemplatesDesktopComponent implements OnInit, OnDestroy {
           this.formData.question = a.formData?.question.trim();
         }
       });
-  }
-
-  @HostListener("document:keydown", ["$event"]) onKeydownHandler(
-    event: KeyboardEvent,
-  ) {
-    if (event.key === "Escape" && this.whichEvent == "setQuestion") {
-      this.activeModal.close();
-    }
   }
 
   swithToSetQuestion(data) {

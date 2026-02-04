@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  HostListener,
-  EventEmitter,
-} from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { Subscription } from "rxjs";
 import { PostService } from "../../../services/post.service";
@@ -384,11 +378,6 @@ export class RoomDetailsComponent implements OnInit, OnDestroy {
     if (this.sessionStorageSub) {
       this.sessionStorageSub.unsubscribe();
     }
-  }
-
-  @HostListener("window:scroll")
-  listenScroll() {
-    this.scrollTop = document.documentElement.scrollTop;
   }
 
   commentTopPosition() {

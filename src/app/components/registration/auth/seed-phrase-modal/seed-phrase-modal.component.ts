@@ -4,7 +4,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   OnInit,
   Output,
@@ -30,12 +29,6 @@ export class SeedPhraseModalComponent implements OnInit, AfterViewInit {
   @ViewChild("inputSeed") inputEl: ElementRef;
 
   constructor(private _clipboardService: ClipboardService) {}
-
-  @HostListener("window:keyup.escape") onKeydownHandler() {
-    if (!this.showSeedPhrase) {
-      this.modalBtnAction("Cancel");
-    }
-  }
 
   ngOnInit(): void {
     if (this.showSeedPhrase?.mnemonic) {

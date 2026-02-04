@@ -1,4 +1,4 @@
-import { Component, DoCheck, HostListener, OnInit } from "@angular/core";
+import { Component, DoCheck, OnInit } from "@angular/core";
 import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { EventsTemplatesDesktopComponent } from "../../createEvent/desktop/events-templates-desktop/events-templates-desktop.component";
 import { RouterModule } from "@angular/router";
@@ -44,13 +44,6 @@ export class SidebarComponent implements OnInit, DoCheck {
       this.display = false;
     } else {
       this.display = true;
-    }
-  }
-
-  @HostListener("window:scroll")
-  listenScroll() {
-    if (this.display) {
-      this.scrollTop = document.documentElement.scrollTop;
     }
   }
 

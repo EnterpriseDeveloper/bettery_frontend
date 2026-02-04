@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, HostListener } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -16,11 +16,4 @@ export class InfoModalComponent {
   @Input() link;
 
   constructor(public activeModal: NgbActiveModal) {}
-
-  @HostListener("document:keydown", ["$event"])
-  onKeydownHandler(event: KeyboardEvent) {
-    if (event.key === "Escape") {
-      this.activeModal.close();
-    }
-  }
 }

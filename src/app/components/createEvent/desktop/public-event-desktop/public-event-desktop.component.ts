@@ -133,14 +133,14 @@ export class PublicEventDesktopComponent implements OnDestroy {
     this.spinnerLoading = true;
     this.createIDSub = this.GetService.get(
       "publicEvents/create_event_id",
-    ).subscribe(
-      (x: any) => {
+    ).subscribe({
+      next: (x: any) => {
         this.sendToDemon(x.id);
       },
-      (err) => {
+      error: (err) => {
         console.log("create event id err: ", err);
       },
-    );
+    });
   }
 
   getAnswers() {
@@ -225,8 +225,8 @@ export class PublicEventDesktopComponent implements OnDestroy {
     this.postSub = this.PostService.post(
       "publicEvents/createEvent",
       this.quizData,
-    ).subscribe(
-      (x: any) => {
+    ).subscribe({
+      next: (x: any) => {
         this.spinnerLoading = false;
         this.created = true;
         this.calculateDate();
@@ -236,7 +236,7 @@ export class PublicEventDesktopComponent implements OnDestroy {
           .navigateByUrl("/", { skipLocationChange: true })
           .then(() => this.router.navigate([`room/${x.roomId}`]));
       },
-      (err) => {
+      error: (err) => {
         this.spinnerLoading = false;
         if (err.error == "Limit is reached") {
           this.modalService.open(ErrorLimitModalComponent, { centered: true });
@@ -245,21 +245,21 @@ export class PublicEventDesktopComponent implements OnDestroy {
         console.log("set qestion error");
         console.log(err);
       },
-    );
+    });
   }
 
   deleteEventId(id) {
     this.deleteEventSub = this.PostService.post(
       "publicEvents/delete_event_id",
       { id: id },
-    ).subscribe(
-      (x) => {
+    ).subscribe({
+      next: (x) => {
         console.log(x);
       },
-      (err) => {
+      error: (err) => {
         console.log("err from delete event id", err);
       },
-    );
+    });
   }
 
   formDataReset() {

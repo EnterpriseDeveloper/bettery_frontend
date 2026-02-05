@@ -118,12 +118,6 @@ export class SetQuestionTabComponent implements OnInit, OnDestroy {
         );
       }
     }
-
-    // this.eventFromLandingSubscr = this.store.select('createEvent').subscribe(a => {
-    //   if (a?.newEvent.trim().length > 0) {
-    //     this.formData.question = a.newEvent.trim();
-    //   }
-    // });
   }
   get f() {
     return this.questionForm.controls;

@@ -142,8 +142,8 @@ export class EventFeedComponent implements OnDestroy {
         finished: this.showEnd,
       };
     }
-    this.postSubsctibe = this.postService.post(path, data).subscribe(
-      (x: any) => {
+    this.postSubsctibe = this.postService.post(path, data).subscribe({
+      next: (x: any) => {
         if (this.pureData === undefined || this.pureData.events.length === 0) {
           this.commentList = x.events[this.currentComment];
         }
@@ -164,11 +164,11 @@ export class EventFeedComponent implements OnDestroy {
         this.finishLoading =
           this.newQuestions.length == this.pureData.amount ? true : false;
       },
-      (err) => {
+      error: (err) => {
         this.spinner = false;
         console.log(err);
       },
-    );
+    });
   }
 
   commentById($event) {

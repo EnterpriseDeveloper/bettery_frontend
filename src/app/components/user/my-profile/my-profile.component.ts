@@ -89,8 +89,8 @@ export class MyProfileComponent implements OnChanges, OnDestroy {
   getInfo(id) {
     this.getAddUserDataSub = this.postService
       .post("user/get_additional_info", { id })
-      .subscribe(
-        (x) => {
+      .subscribe({
+        next: (x) => {
           this.addionalData = x;
           if (this.addionalData.publicEmail == null) {
             this.letsUpdatePublicEmail(true);
@@ -98,10 +98,10 @@ export class MyProfileComponent implements OnChanges, OnDestroy {
             this.emailFlag = this.addionalData.publicEmail;
           }
         },
-        (err) => {
+        error: (err) => {
           console.log("from get additional data", err);
         },
-      );
+      });
   }
 
   getIcon(icon) {
@@ -128,8 +128,8 @@ export class MyProfileComponent implements OnChanges, OnDestroy {
   }
 
   async updateBalance() {
-    this.postSub = this.getService.get("users/getBalance").subscribe(
-      async (e: any) => {
+    this.postSub = this.getService.get("users/getBalance").subscribe({
+      next: (e: any) => {
         this.store.dispatch(
           new CoinsActios.UpdateCoins({
             // TODO check bty on main chain
@@ -139,10 +139,10 @@ export class MyProfileComponent implements OnChanges, OnDestroy {
           }),
         );
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
       },
-    );
+    });
   }
 
   editClick() {
@@ -159,14 +159,14 @@ export class MyProfileComponent implements OnChanges, OnDestroy {
 
       this.updateNameSub = this.postService
         .post("user/update_nickname", data)
-        .subscribe(
-          () => {
+        .subscribe({
+          next: () => {
             this.updateUser();
           },
-          (err) => {
+          error: (err) => {
             console.log("from update_nickname data", err);
           },
-        );
+        });
 
       this.editFlag = false;
     }
@@ -191,14 +191,14 @@ export class MyProfileComponent implements OnChanges, OnDestroy {
     };
     this.updateEmailSub = this.postService
       .post("user/update_public_email", data)
-      .subscribe(
-        (x: any) => {
-          x.publicEmail = this.emailFlag;
+      .subscribe({
+        next: (x: any) => {
+          this.emailFlag = x.publicEmail;
         },
-        (err) => {
+        error: (err) => {
           console.log("from update_public_email data", err);
         },
-      );
+      });
   }
 
   updateUser() {

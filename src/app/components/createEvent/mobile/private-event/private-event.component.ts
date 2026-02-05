@@ -101,15 +101,15 @@ export class PrivateEventComponent implements OnDestroy {
 
     this.createSub = this.getSevice
       .get("privateEvents/create_event_id")
-      .subscribe(
-        (x: any) => {
-          console.log("send To Demon");
+      .subscribe({
+        next: (x: any) => {
+          this.eventData = x;
           this.sendToDemon(x.id);
         },
-        (err) => {
+        error: (err) => {
           console.log("create private event id err", err.message);
         },
-      );
+      });
   }
   getAnswers() {
     const answer = this.formData.answers.map((x) => {
@@ -163,14 +163,14 @@ export class PrivateEventComponent implements OnDestroy {
   deleteEventId(id) {
     this.deleteEventSub = this.postService
       .post("privateEvents/delete_event_id", { id })
-      .subscribe(
-        (x: any) => {
+      .subscribe({
+        next: (x) => {
           console.log(x);
         },
-        (err) => {
+        error: (err) => {
           console.log("err from delete event id", err);
         },
-      );
+      });
   }
 
   sendToDb(transactionHash: any, id: number) {
@@ -202,8 +202,8 @@ export class PrivateEventComponent implements OnDestroy {
     };
     this.createSub = this.postService
       .post("privateEvents/createEvent", this.eventData)
-      .subscribe(
-        (x: any) => {
+      .subscribe({
+        next: (x: any) => {
           this.eventData._id = x.id;
           this.spinnerLoading = false;
           this.calculateDate();
@@ -211,7 +211,7 @@ export class PrivateEventComponent implements OnDestroy {
           this.created = true;
           this.formDataReset();
         },
-        (err) => {
+        error: (err) => {
           console.log("set qestion error");
           console.log(err);
           if (err.error == "Limit is reached") {
@@ -221,7 +221,7 @@ export class PrivateEventComponent implements OnDestroy {
             this.spinnerLoading = false;
           }
         },
-      );
+      });
   }
 
   formDataReset() {

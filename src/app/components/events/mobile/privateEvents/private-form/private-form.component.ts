@@ -108,18 +108,18 @@ export class PrivateFormComponent implements OnDestroy {
     };
     this.postSub = this.postService
       .post("privateEvents/participate", data)
-      .subscribe(
-        async () => {
+      .subscribe({
+        next: () => {
           this.spinnerLoading = false;
           this.betOrBackBtn(false);
           this.errorMessage = undefined;
         },
-        (err) => {
+        error: (err) => {
           this.spinnerLoading = false;
           this.errorMessage = err.toString();
           console.log(err);
         },
-      );
+      });
   }
 
   betOrBackBtn(increased: any) {

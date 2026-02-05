@@ -133,19 +133,19 @@ export class PrivateExpertComponent implements OnInit, OnDestroy {
     };
     this.postSub = this.postService
       .post("privateEvents/validate", data)
-      .subscribe(
-        async () => {
+      .subscribe({
+        next: () => {
           this.answerIndex = answer;
           this.spinnerLoading = false;
           this.errorMessage = undefined;
           this.confirm = true;
         },
-        (err) => {
+        error: (err) => {
           this.spinnerLoading = false;
           this.errorMessage = err.error;
           console.log(err.error);
         },
-      );
+      });
   }
 
   change(increased: any) {

@@ -99,18 +99,18 @@ export class CreateRoomTabComponent implements OnInit, OnDestroy {
   }
 
   getUserRooms() {
-    this.postSubscribe = this.getService.get("room/get_by_user_id").subscribe(
-      (x: any) => {
+    this.postSubscribe = this.getService.get("room/get_by_user_id").subscribe({
+      next: (x: any) => {
         if (x?.length !== 0 && this.formData.roomName == "") {
           this.createRoomForm.controls.createNewRoom.setValue("exist");
         }
         this.allRooms = x;
         this.setValueExist();
       },
-      (err) => {
+      error: (err) => {
         console.log(err);
       },
-    );
+    });
   }
 
   setValueExist(): void {
@@ -191,28 +191,30 @@ export class CreateRoomTabComponent implements OnInit, OnDestroy {
     let x = {
       name: this.roomForm.value.roomName,
     };
-    this.postValidation = this.postService.post("room/validation", x).subscribe(
-      (z) => {
-        this.roomError = undefined;
-        let data = {
-          ...this.roomForm.value,
-          ...this.createRoomForm.value,
-          ...this.existRoom.value,
-        };
-        this.formData.whichRoom = data.createNewRoom;
-        this.formData.roomName = data.roomName;
-        this.formData.roomColor = data.roomColor;
-        this.formData.eventType = data.eventType;
-        this.formData.roomId = data.roomId;
+    this.postValidation = this.postService
+      .post("room/validation", x)
+      .subscribe({
+        next: () => {
+          this.roomError = undefined;
+          let data = {
+            ...this.roomForm.value,
+            ...this.createRoomForm.value,
+            ...this.existRoom.value,
+          };
+          this.formData.whichRoom = data.createNewRoom;
+          this.formData.roomName = data.roomName;
+          this.formData.roomColor = data.roomColor;
+          this.formData.eventType = data.eventType;
+          this.formData.roomId = data.roomId;
 
-        this.store.dispatch(formDataAction({ formData: this.formData }));
-        this.router.navigate(["/make-rules"]);
-      },
-      (err) => {
-        console.log(err);
-        this.roomError = err.message;
-      },
-    );
+          this.store.dispatch(formDataAction({ formData: this.formData }));
+          this.router.navigate(["/make-rules"]);
+        },
+        error: (err) => {
+          console.log(err);
+          this.roomError = err.message;
+        },
+      });
   }
 
   cancel() {

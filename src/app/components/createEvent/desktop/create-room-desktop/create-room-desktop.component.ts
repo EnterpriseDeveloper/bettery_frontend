@@ -182,7 +182,7 @@ export class CreateRoomDesktopComponent implements OnInit, OnDestroy {
     this.postValidation = this.postService
       .post("room/validation", x)
       .subscribe({
-        next: (z) => {
+        next: () => {
           this.roomError = undefined;
           let data = {
             ...this.roomForm.value,

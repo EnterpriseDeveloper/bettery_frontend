@@ -16,6 +16,7 @@ import { MobilePlugPageComponent } from "../../share/desktop/mobile-plug-page/mo
 import { SpinnerLoadingComponent } from "../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { FormsModule } from "@angular/forms";
 import { selectUsers } from "../../../selectors/user.selector";
+import { selectCreateEvent } from "../../../selectors/createEvent.selector";
 
 @Component({
   selector: "app-rooms",
@@ -309,7 +310,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
   }
 
   sendNewEvent() {
-    this.formDataSub = this.store.select("createEvent").subscribe((x) => {
+    this.formDataSub = this.store.select(selectCreateEvent).subscribe((x) => {
       this.formData = x.formData;
     });
     this.formData.question = this.newCreateEvent;

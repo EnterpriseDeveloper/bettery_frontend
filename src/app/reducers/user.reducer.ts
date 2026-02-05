@@ -1,5 +1,3 @@
-import { Action } from "@ngrx/store";
-import { User } from "./../models/User.model";
 import * as UserActions from "./../actions/user.actions";
 
 export function userReducer(state: any[] = [], action: any) {

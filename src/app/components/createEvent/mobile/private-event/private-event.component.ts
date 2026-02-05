@@ -16,6 +16,7 @@ import { connectToSign } from "../../../../contract/cosmosInit";
 import { CommonModule } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { selectUsers } from "../../../../selectors/user.selector";
+import { selectCreateEvent } from "../../../../selectors/createEvent.selector";
 
 @Component({
   selector: "private-event-modile",
@@ -56,9 +57,11 @@ export class PrivateEventComponent implements OnDestroy {
       }
     });
 
-    this.fromDataSubscribe = this.store.select("createEvent").subscribe((x) => {
-      this.formData = x?.formData;
-    });
+    this.fromDataSubscribe = this.store
+      .select(selectCreateEvent)
+      .subscribe((x) => {
+        this.formData = x?.formData;
+      });
   }
 
   cancel() {

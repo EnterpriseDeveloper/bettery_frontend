@@ -11,6 +11,7 @@ import { NavbarComponent } from "./components/navigation/navbar/navbar.component
 import { SidebarComponent } from "./components/navigation/sidebar/sidebar.component";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { NgZone } from "@angular/core";
 
 declare global {
   interface Window {
@@ -34,7 +35,9 @@ export class AppComponent implements OnDestroy, OnInit {
   constructor(
     private post: PostService,
     private store: Store<AppState>,
-  ) {}
+  ) {
+    console.log(NgZone.isInAngularZone());
+  }
 
   ngOnInit() {
     if (window.location.hash.length == 0) {

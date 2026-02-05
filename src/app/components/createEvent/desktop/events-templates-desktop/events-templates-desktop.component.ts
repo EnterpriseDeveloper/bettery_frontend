@@ -11,6 +11,7 @@ import { SetQuestionDesktopComponent } from "../set-question-desktop/set-questio
 import { PrivateEventDesktopComponent } from "../private-event-desktop/private-event-desktop.component";
 import { PublicEventDesktopComponent } from "../public-event-desktop/public-event-desktop.component";
 import { selectUsers } from "../../../../selectors/user.selector";
+import { selectCreateEvent } from "../../../../selectors/createEvent.selector";
 
 const init = {
   question: "",
@@ -101,8 +102,8 @@ export class EventsTemplatesDesktopComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.eventFromLandingSubscr = this.store
-      .select("createEvent")
-      .subscribe((a) => {
+      .select(selectCreateEvent)
+      .subscribe((a: any) => {
         if (a.formData?.question.trim().length > 0) {
           this.formData.question = a.formData?.question.trim();
         }

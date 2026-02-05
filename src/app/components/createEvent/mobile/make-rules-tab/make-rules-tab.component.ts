@@ -21,6 +21,7 @@ import { Subscription } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { TextareaComponent } from "../../../share/mobile/textarea/textarea.component";
 import { EventsTemplateNewComponent } from "../events-template-new/events-template-new.component";
+import { selectCreateEvent } from "../../../../selectors/createEvent.selector";
 
 type Time = { name: string; date: any; value: number };
 
@@ -160,9 +161,11 @@ export class MakeRulesTabComponent implements OnInit, OnDestroy {
     config.seconds = false;
     config.spinners = false;
 
-    this.formDataSubscribe = this.store.select("createEvent").subscribe((x) => {
-      this.formData = x?.formData;
-    });
+    this.formDataSubscribe = this.store
+      .select(selectCreateEvent)
+      .subscribe((x) => {
+        this.formData = x?.formData;
+      });
   }
 
   ngOnInit(): void {

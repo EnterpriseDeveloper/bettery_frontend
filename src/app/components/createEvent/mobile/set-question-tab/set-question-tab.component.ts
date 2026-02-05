@@ -19,6 +19,7 @@ import { ImageLoaderComponent } from "../../../share/both/image-loader/image-loa
 import { EventsTemplateNewComponent } from "../events-template-new/events-template-new.component";
 import { CommonModule } from "@angular/common";
 import { selectUsers } from "../../../../selectors/user.selector";
+import { selectCreateEvent } from "../../../../selectors/createEvent.selector";
 
 @Component({
   selector: "set-question-tab",
@@ -57,7 +58,7 @@ export class SetQuestionTabComponent implements OnInit, OnDestroy {
     readonly router: Router,
   ) {
     this.formDataSubscribe = this.store
-      .select("createEvent")
+      .select(selectCreateEvent)
       .subscribe((value) => {
         this.formData = value?.formData;
       });
@@ -67,7 +68,7 @@ export class SetQuestionTabComponent implements OnInit, OnDestroy {
     this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x && x.length != 0) {
         this.formDataSubscribe = this.store
-          .select("createEvent")
+          .select(selectCreateEvent)
           .subscribe((value) => {
             this.formData = value?.formData;
           });

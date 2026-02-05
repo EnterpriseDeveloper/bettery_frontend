@@ -21,6 +21,7 @@ import { TextareaComponent } from "../../../share/mobile/textarea/textarea.compo
 import { CommonModule } from "@angular/common";
 import { EventsTemplateNewComponent } from "../events-template-new/events-template-new.component";
 import { selectUsers } from "../../../../selectors/user.selector";
+import { selectCreateEvent } from "../../../../selectors/createEvent.selector";
 
 @Component({
   selector: "create-room-tab",
@@ -58,9 +59,11 @@ export class CreateRoomTabComponent implements OnInit, OnDestroy {
     readonly store: Store<AppState>,
     readonly router: Router,
   ) {
-    this.fromDataSubscribe = this.store.select("createEvent").subscribe((x) => {
-      this.formData = x?.formData;
-    });
+    this.fromDataSubscribe = this.store
+      .select(selectCreateEvent)
+      .subscribe((x) => {
+        this.formData = x?.formData;
+      });
   }
 
   ngOnInit(): void {

@@ -17,14 +17,13 @@ import { RegistrationComponent } from "../../../registration/registration/regist
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModule, DOCUMENT } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { TimeAgoPipe } from "./pipe/time-ago.pipe";
 
 @Component({
   standalone: true,
   selector: "app-comment",
   templateUrl: "./comment.component.html",
   styleUrls: ["./comment.component.sass"],
-  imports: [CommonModule, FormsModule, TimeAgoPipe],
+  imports: [CommonModule, FormsModule],
 })
 export class CommentComponent implements OnInit, OnDestroy, OnChanges {
   @Input() theme: string;

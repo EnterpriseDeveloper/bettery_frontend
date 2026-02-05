@@ -28,6 +28,7 @@ import { SessionStorageService } from "../rooms/sessionStorage-service/session-s
 import { Router, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { LandingFormComponent } from "./landing-form/landing-form.component";
+import { selectCreateEvent } from "../../selectors/createEvent.selector";
 
 @Component({
   selector: "home",
@@ -134,7 +135,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   sendEvent() {
     //  to do remake
-    this.formDataSub = this.store.select("createEvent").subscribe((x) => {
+    this.formDataSub = this.store.select(selectCreateEvent).subscribe((x) => {
       this.fromData = x?.formData;
     });
     if (this.fromData?.answers.length > 0) {

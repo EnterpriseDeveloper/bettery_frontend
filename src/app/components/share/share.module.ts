@@ -5,7 +5,6 @@ import { InfoModalComponent } from "./both/modals/info-modal/info-modal.componen
 import { WelcomePageComponent } from "./both/modals/welcome-page/welcome-page.component";
 import { CommentComponent } from "./both/comment/comment.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { TimeAgoPipe } from "./both/comment/pipe/time-ago.pipe";
 import { MetaMaskModalComponent } from "./desktop/meta-mask-modal/meta-mask-modal.component";
 import { ErrorLimitModalComponent } from "./both/modals/error-limit-modal/error-limit-modal.component";
 import { QuizTemplateComponent } from "./desktop/quiz-template/quiz-template.component";
@@ -54,7 +53,6 @@ import { ProfileSeedModalComponent } from "./both/modals/profile-seed-modal/prof
     FilterTimelineComponent,
     FilterTimeLineMobileComponent,
     ComingSoonMobileComponent,
-    TimeAgoPipe,
     CommonModule,
     InfoModalComponent,
     MetaMaskModalComponent,

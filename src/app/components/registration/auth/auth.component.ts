@@ -17,13 +17,7 @@ import { SpinnerLoadingComponent } from "../../share/both/spinners/spinner-loadi
   selector: "app-auth",
   templateUrl: "./auth.component.html",
   styleUrls: ["./auth.component.sass"],
-  imports: [
-    RouterModule,
-    RegistrationComponent,
-    WelcomePageComponent,
-    SeedPhraseModalComponent,
-    SpinnerLoadingComponent,
-  ],
+  imports: [RouterModule, SeedPhraseModalComponent, SpinnerLoadingComponent],
 })
 export class AuthComponent implements OnDestroy {
   spinner = true;

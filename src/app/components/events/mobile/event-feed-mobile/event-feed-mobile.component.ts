@@ -9,7 +9,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RegistrationComponent } from "../../../registration/registration/registration.component";
 import { Coins } from "../../../../models/Coins.model";
 import { EventModel } from "../../../../models/Event.model";
-import { ComingSoonComponent } from "../../../share/desktop/coming-soon/coming-soon.component";
 import { SpinnerLoadMoreComponent } from "../../../share/both/spinners/spinner-load-more/spinner-load-more.component";
 import { JoinPageItemTemplateComponent } from "../join-page-item-template/join-page-item-template.component";
 import { CommonModule } from "@angular/common";
@@ -18,7 +17,6 @@ import { SearchBarMobileComponent } from "../../../share/mobile/search-bar-mobil
 import { RouterModule } from "@angular/router";
 import { SpinnerLoadingComponent } from "../../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { DownBarComponentMobile } from "../../../navigation/down-bar-mobile/down-bar.component";
-import { FilterTimelineComponent } from "../../../share/desktop/filterTimeline/filterTimeline.component";
 import { FilterTimeLineMobileComponent } from "../../../share/mobile/filter-time-line-mobile/filter-time-line-mobile.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
@@ -31,13 +29,11 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     InfiniteScrollModule,
     RouterModule,
     SpinnerLoadingComponent,
-    ComingSoonComponent,
     DownBarComponentMobile,
     SearchBarMobileComponent,
     SpinnerLoadMoreComponent,
     ComingSoonMobileComponent,
     JoinPageItemTemplateComponent,
-    FilterTimelineComponent,
     FilterTimeLineMobileComponent,
   ],
 })

@@ -476,7 +476,7 @@ export class QuizTemplateComponent
       let { memonic, address, client } = await connectToSign();
 
       const msg = {
-        typeUrl: "/bettery.publicevents.MsgCreatePartPubEvents",
+        typeUrl: "/bettery.publicevents.v1.MsgCreatePartPubEvents",
         value: {
           creator: address,
           pubId: answer.event_id,
@@ -591,7 +591,7 @@ export class QuizTemplateComponent
   async setToNetworkValidation(answer) {
     let { memonic, address, client } = await connectToSign();
     const msg = {
-      typeUrl: "bettery.publicevents.MsgCreateValidPubEvents",
+      typeUrl: "bettery.publicevents.v1.MsgCreateValidPubEvents",
       value: {
         creator: address,
         pubId: answer.event_id,

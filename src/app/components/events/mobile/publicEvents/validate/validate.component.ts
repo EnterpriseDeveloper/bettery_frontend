@@ -172,7 +172,7 @@ export class ValidateComponent implements OnInit, OnDestroy {
     const { memonic, address, client } = await connectToSign();
 
     const msg = {
-      typeUrl: "/bettery.publicevents.MsgCreateValidPubEvents",
+      typeUrl: "/bettery.publicevents.v1.MsgCreateValidPubEvents",
       value: {
         creator: address,
         pubId: this.eventData.id,

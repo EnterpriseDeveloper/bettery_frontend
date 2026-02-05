@@ -15,16 +15,22 @@ import authHelp from "../helpers/auth-help";
 import { environment } from "../../environments/environment";
 
 const types = [
-  ["/bettery.funds.MsgCreateSwipeBet", MsgCreateSwipeBet],
-  ["/bettery.publicevents.MsgCreateValidPubEvents", MsgCreateValidPubEvents],
-  [".bettery.publicevents.MsgCreateCreatePubEvents", MsgCreateCreatePubEvents],
-  ["/bettery.publicevents.MsgCreatePartPubEvents", MsgCreatePartPubEvents],
-  ["/bettery.privateevents.MsgCreateValidPrivEvents", MsgCreateValidPrivEvents],
-  ["/bettery.privateevents.MsgCreatePartPrivEvents", MsgCreatePartPrivEvents],
+  ["/bettery.funds.v1.MsgCreateSwipeBet", MsgCreateSwipeBet],
+  ["/bettery.publicevents.v1.MsgCreateValidPubEvents", MsgCreateValidPubEvents],
   [
-    "/bettery.privateevents.MsgCreateCreatePrivEvents",
-    MsgCreateCreatePrivEvents,
+    "/bettery.publicevents.v1.MsgCreateCreatePubEvents",
+    MsgCreateCreatePubEvents,
   ],
+  ["/bettery.publicevents.v1.MsgCreatePartPubEvents", MsgCreatePartPubEvents],
+  [
+    "/bettery.privateevents.v1.MsgCreateValidPrivEvents",
+    MsgCreateValidPrivEvents,
+  ],
+  [
+    "/bettery.privateevents.v1.MsgCreatePartPrivEvents",
+    MsgCreatePartPrivEvents,
+  ],
+  ["/bettery.privateevents.v1.MsgCreatePrivEvents", MsgCreateCreatePrivEvents],
 ];
 
 const registry = new Registry(<any>types);

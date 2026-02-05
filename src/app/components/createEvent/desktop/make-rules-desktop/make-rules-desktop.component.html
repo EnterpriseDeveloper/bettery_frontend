@@ -3,35 +3,30 @@
     <form [formGroup]="publicForm">
       <p class="name">Bet WITH</p>
       <div class="checkBox">
- <div>
-   <div class="pretty p-default p-round inline">
-     <input type="radio" value="token" formControlName="tokenType" checked>
-     <div class="state p-success-o checkPos">
-       <label class="pos"> </label>
-     </div>
-     <p class="tab" [ngClass]="{ 'tab_active': f.tokenType.value == 'token' }">BET Token</p>
-   </div>
+        <div>
+          <div class="pretty p-default p-round inline">
+            <input type="radio" value="token" formControlName="tokenType" checked>
+            <div class="state p-success-o checkPos">
+              <label class="pos"> </label>
+            </div>
+            <p class="tab" [ngClass]="{ 'tab_active': f.tokenType.value == 'token' }">BET Token</p>
+          </div>
 
-   <div class="pretty p-default p-round inline">
-     <input type="radio" value="ether" formControlName="tokenType">
-     <div class="state p-success-o checkPos">
-       <label class="pos"> </label>
-     </div>
-     <p class="tab" [ngClass]="{ 'tab_active': f.tokenType.value == 'ether' }">Ethereum</p>
+          <div class="pretty p-default p-round inline">
+            <input type="radio" value="ether" formControlName="tokenType">
+            <div class="state p-success-o checkPos">
+              <label class="pos"> </label>
+            </div>
+            <p class="tab" [ngClass]="{ 'tab_active': f.tokenType.value == 'ether' }">Ethereum</p>
 
-   </div>
- </div>
+          </div>
+        </div>
         <div>
           <span (click)="openLearnMore()" class="link">Learn more</span>
         </div>
       </div>
       <div>
-        <div class="labelTime">
-          <p style="margin-bottom: 8px; margin-top: 32px">NUMBER OF EXPERTS</p>
-        </div>
         <div class="pretty p-default p-round inline expertsCheckWrapper" style="margin-bottom: 8px">
-          <input (click)="reinitializeForm('company')" type="radio" value="company" formControlName="expertsCountType"
-                 checked>
           <div class="state p-success-o checkBoxPosition">
             <label class="pos"> </label>
           </div>
@@ -72,9 +67,8 @@
           <div class="dropBox arowMarker">
             <label for="startPublicTime" id="labelC2">{{endPublicTime}}</label>
             <select (change)="chosePublicEndTime()" [ngClass]="{ 'is_invalid': submitted && pub.publicEndTime.errors }"
-                    formControlName="publicEndTime" class="btn" name="startPublicTime" id="startPublicTime">
-              <option style="color: #0B1511" *ngFor="let time of times, let i = index"
-                      value="{{time.name}}">
+              formControlName="publicEndTime" class="btn" name="startPublicTime" id="startPublicTime">
+              <option style="color: #0B1511" *ngFor="let time of times, let i = index" value="{{time.name}}">
                 {{time.name}}</option>
             </select>
             <div class="calendarPosition">
@@ -91,7 +85,8 @@
       </div>
       <div>
         <ul style="padding-top: 15px">
-          <li class="infoGrey">Loser bets are distributed to<span> Winners, Host</span>, and <span>Experts.</span> Default no. of Experts is based on no. of Players joined.
+          <li class="infoGrey">Loser bets are distributed to<span> Winners, Host</span>, and <span>Experts.</span>
+            Default no. of Experts is based on no. of Players joined.
           </li>
         </ul>
         <div class="d-flex justify-content-center mb-2" (click)="openHowEventsWorkSocial(content2)">
@@ -114,18 +109,9 @@
       <div class="form-group mb-0">
         <div class="inputBox">
 
-          <app-textarea style="width: 100%"
-                        [status]="'privateBet'"
-                        [isMobile]="false"
-                        [questionForm]="privateForm"
-                        [limit]="32"
-                        [limitEnd]="60"
-                        [submitted]="submitted"
-                        [title]="'Get free dinner'"
-                        [controlName]="'winner'"
-                        [nickName]="'Winner'"
-                        [titleWhatToWin]="'What to win or lose'"
-          ></app-textarea>
+          <app-textarea style="width: 100%" [status]="'privateBet'" [isMobile]="false" [questionForm]="privateForm"
+            [limit]="32" [limitEnd]="60" [submitted]="submitted" [title]="'Get free dinner'" [controlName]="'winner'"
+            [nickName]="'Winner'" [titleWhatToWin]="'What to win or lose'"></app-textarea>
 
         </div>
         <div *ngIf="submitted && priv.winner.errors">
@@ -136,17 +122,9 @@
       <div class="form-group">
         <div class="inputBox">
 
-          <app-textarea style="width: 100%"
-                        [status]="'privateBet'"
-                        [isMobile]="false"
-                        [questionForm]="privateForm"
-                        [limit]="32"
-                        [limitEnd]="60"
-                        [submitted]="submitted"
-                        [title]="'Share the bill'"
-                        [controlName]="'losers'"
-                        [nickName]="'Losers'"
-          ></app-textarea>
+          <app-textarea style="width: 100%" [status]="'privateBet'" [isMobile]="false" [questionForm]="privateForm"
+            [limit]="32" [limitEnd]="60" [submitted]="submitted" [title]="'Share the bill'" [controlName]="'losers'"
+            [nickName]="'Losers'"></app-textarea>
 
         </div>
         <div *ngIf="submitted && priv.losers.errors">

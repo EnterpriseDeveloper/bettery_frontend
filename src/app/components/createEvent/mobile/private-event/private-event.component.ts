@@ -117,7 +117,7 @@ export class PrivateEventComponent implements OnDestroy {
     const { memonic, address, client } = await connectToSign();
 
     const msg = {
-      typeUrl: "/bettery.privateevents.MsgCreateCreatePrivEvents", //!check correctly
+      typeUrl: "/bettery.privateevents.v1.MsgCreatePrivEvents", //!check correctly
       value: {
         creator: address,
         privId: id,

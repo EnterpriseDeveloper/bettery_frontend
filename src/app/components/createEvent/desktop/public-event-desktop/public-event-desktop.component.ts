@@ -155,7 +155,7 @@ export class PublicEventDesktopComponent implements OnDestroy {
     let { memonic, address, client } = await connectToSign();
 
     const msg = {
-      typeUrl: "/bettery.publicevents.MsgCreateCreatePubEvents",
+      typeUrl: "/bettery.publicevents.v1.MsgCreateCreatePubEvents",
       value: {
         creator: address,
         pubId: id,

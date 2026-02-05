@@ -21,6 +21,7 @@ import { User } from "../../../../../models/User.model";
 import { connectToSign } from "../../../../../contract/cosmosInit";
 import { SpinnerLoadingComponent } from "../../../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "app-private-expert",
@@ -51,17 +52,17 @@ export class PrivateExpertComponent implements OnInit, OnDestroy {
   answerIndex: number;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private store: Store<AppState>,
-    private postService: PostService,
+    readonly formBuilder: FormBuilder,
+    readonly store: Store<AppState>,
+    readonly postService: PostService,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userData = x[0];
       }
     });
 
-    this.answerForm = formBuilder.group({
+    this.answerForm = this.formBuilder.group({
       answer: ["", Validators.required],
     });
   }

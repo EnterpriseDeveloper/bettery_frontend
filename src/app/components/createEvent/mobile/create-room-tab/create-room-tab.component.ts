@@ -20,6 +20,7 @@ import { GetService } from "../../../../services/get.service";
 import { TextareaComponent } from "../../../share/mobile/textarea/textarea.component";
 import { CommonModule } from "@angular/common";
 import { EventsTemplateNewComponent } from "../events-template-new/events-template-new.component";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "create-room-tab",
@@ -50,12 +51,12 @@ export class CreateRoomTabComponent implements OnInit, OnDestroy {
   isLimit: boolean;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private modalService: NgbModal,
-    private postService: PostService,
-    private getService: GetService,
-    private store: Store<AppState>,
-    private router: Router,
+    readonly formBuilder: FormBuilder,
+    readonly modalService: NgbModal,
+    readonly postService: PostService,
+    readonly getService: GetService,
+    readonly store: Store<AppState>,
+    readonly router: Router,
   ) {
     this.fromDataSubscribe = this.store.select("createEvent").subscribe((x) => {
       this.formData = x?.formData;
@@ -78,7 +79,7 @@ export class CreateRoomTabComponent implements OnInit, OnDestroy {
       roomId: [this.formData.roomId, Validators.required],
     });
 
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x && x?.length != 0) {
         this.userId = x[0]._id;
         this.nickName = x[0].nickName.split(" ")[0];

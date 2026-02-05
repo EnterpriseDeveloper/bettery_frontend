@@ -25,6 +25,7 @@ import { RoomModel } from "../../../../models/Room.model";
 import { User } from "../../../../models/User.model";
 import { GetService } from "../../../../services/get.service";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "create-room-desktop",
@@ -53,11 +54,11 @@ export class CreateRoomDesktopComponent implements OnInit, OnDestroy {
   nickName: string;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private modalService: NgbModal,
-    private postService: PostService,
-    private getService: GetService,
-    private store: Store<AppState>,
+    readonly formBuilder: FormBuilder,
+    readonly modalService: NgbModal,
+    readonly postService: PostService,
+    readonly getService: GetService,
+    readonly store: Store<AppState>,
   ) {}
 
   ngOnInit(): void {
@@ -76,7 +77,7 @@ export class CreateRoomDesktopComponent implements OnInit, OnDestroy {
       roomId: [this.formData.roomId, Validators.required],
     });
 
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userId = x[0]._id;
         this.nickName = x[0].nickName.split(" ")[0];
@@ -93,18 +94,18 @@ export class CreateRoomDesktopComponent implements OnInit, OnDestroy {
   }
 
   getUserRooms() {
-    this.postSubscribe = this.getService.get("room/get_by_user_id").subscribe(
-      (x: any) => {
+    this.postSubscribe = this.getService.get("room/get_by_user_id").subscribe({
+      next: (x: any) => {
         if (x.length !== 0 && this.formData.roomName == "") {
           this.createRoomForm.controls.createNewRoom.setValue("exist");
         }
         this.allRooms = x;
         this.setValueExist();
       },
-      (err) => {
+      error: (err) => {
         console.log(err);
       },
-    );
+    });
   }
 
   setValueExist(): void {
@@ -178,21 +179,23 @@ export class CreateRoomDesktopComponent implements OnInit, OnDestroy {
     let x = {
       name: this.roomForm.value.roomName,
     };
-    this.postValidation = this.postService.post("room/validation", x).subscribe(
-      (z) => {
-        this.roomError = undefined;
-        let data = {
-          ...this.roomForm.value,
-          ...this.createRoomForm.value,
-          ...this.existRoom.value,
-        };
-        this.goNext.next(data);
-      },
-      (err) => {
-        console.log(err);
-        this.roomError = err.message;
-      },
-    );
+    this.postValidation = this.postService
+      .post("room/validation", x)
+      .subscribe({
+        next: (z) => {
+          this.roomError = undefined;
+          let data = {
+            ...this.roomForm.value,
+            ...this.createRoomForm.value,
+            ...this.existRoom.value,
+          };
+          this.goNext.next(data);
+        },
+        error: (err) => {
+          console.log(err);
+          this.roomError = err.message;
+        },
+      });
   }
 
   cancel() {

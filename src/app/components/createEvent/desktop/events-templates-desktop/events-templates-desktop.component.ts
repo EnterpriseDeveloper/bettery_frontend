@@ -10,6 +10,7 @@ import { CreateRoomDesktopComponent } from "../create-room-desktop/create-room-d
 import { SetQuestionDesktopComponent } from "../set-question-desktop/set-question-desktop.component";
 import { PrivateEventDesktopComponent } from "../private-event-desktop/private-event-desktop.component";
 import { PublicEventDesktopComponent } from "../public-event-desktop/public-event-desktop.component";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 const init = {
   question: "",
@@ -60,10 +61,10 @@ export class EventsTemplatesDesktopComponent implements OnInit, OnDestroy {
   // modalIsOpen: boolean;
 
   constructor(
-    private store: Store<AppState>,
+    readonly store: Store<AppState>,
     public activeModal: NgbActiveModal,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length == 0) {
         this.formData = {
           question: "",

@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms";
 import { MyPayoutsComponent } from "../my-payouts/my-payouts.component";
 import { MyProfileComponent } from "../my-profile/my-profile.component";
 import { MyReferralsComponent } from "../my-referrals/my-referrals.component";
+import { selectUsers } from "../../../selectors/user.selector";
 
 @Component({
   selector: "profile",
@@ -34,7 +35,7 @@ export class ProfileComponent implements OnDestroy {
     private router: Router,
   ) {
     this.storeUserSubscribe = this.store
-      .select("user")
+      .select(selectUsers)
       .subscribe((x: User[]) => {
         if (x.length === 0) {
           let autoLogin = localStorage.getItem("_buserlog");

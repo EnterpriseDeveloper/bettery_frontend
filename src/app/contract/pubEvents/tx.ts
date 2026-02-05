@@ -8,7 +8,7 @@ export const protobufPackage = "bettery.publicevents";
 /** this line is used by starport scaffolding # proto/tx/message */
 export interface MsgCreateFihishPubEvent {
   creator: string;
-  pubId: number;
+  pub_id: number;
 }
 
 export interface MsgCreateFihishPubEventResponse {
@@ -17,7 +17,7 @@ export interface MsgCreateFihishPubEventResponse {
 
 export interface MsgCreateValidPubEvents {
   creator: string;
-  pubId: number;
+  pub_id: number;
   answers: string;
   reput: number;
 }
@@ -28,7 +28,7 @@ export interface MsgCreateValidPubEventsResponse {
 
 export interface MsgCreatePartPubEvents {
   creator: string;
-  pubId: number;
+  pub_id: number;
   answers: string;
   amount: string;
 }
@@ -39,7 +39,7 @@ export interface MsgCreatePartPubEventsResponse {
 
 export interface MsgCreateCreatePubEvents {
   creator: string;
-  pubId: number;
+  pub_id: number;
   question: string;
   answers: string[];
   premAmount: string;
@@ -53,7 +53,7 @@ export interface MsgCreateCreatePubEventsResponse {
   id: number;
 }
 
-const baseMsgCreateFihishPubEvent: object = { creator: "", pubId: 0 };
+const baseMsgCreateFihishPubEvent: object = { creator: "", pub_id: 0 };
 
 export const MsgCreateFihishPubEvent = {
   encode(
@@ -63,8 +63,8 @@ export const MsgCreateFihishPubEvent = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.pubId !== 0) {
-      writer.uint32(16).uint64(message.pubId);
+    if (message.pub_id !== 0) {
+      writer.uint32(16).uint64(message.pub_id);
     }
     return writer;
   },
@@ -82,7 +82,7 @@ export const MsgCreateFihishPubEvent = {
           message.creator = reader.string();
           break;
         case 2:
-          message.pubId = longToNumber(reader.uint64() as Long);
+          message.pub_id = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -101,10 +101,10 @@ export const MsgCreateFihishPubEvent = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = Number(object.pubId);
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = Number(object.pub_id);
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     return message;
   },
@@ -112,7 +112,7 @@ export const MsgCreateFihishPubEvent = {
   toJSON(message: MsgCreateFihishPubEvent): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.pub_id !== undefined && (obj.pub_id = message.pub_id);
     return obj;
   },
 
@@ -127,10 +127,10 @@ export const MsgCreateFihishPubEvent = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = object.pubId;
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = object.pub_id;
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     return message;
   },
@@ -207,7 +207,7 @@ export const MsgCreateFihishPubEventResponse = {
 
 const baseMsgCreateValidPubEvents: object = {
   creator: "",
-  pubId: 0,
+  pub_id: 0,
   answers: "",
   reput: 0,
 };
@@ -220,8 +220,8 @@ export const MsgCreateValidPubEvents = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.pubId !== 0) {
-      writer.uint32(16).uint64(message.pubId);
+    if (message.pub_id !== 0) {
+      writer.uint32(16).uint64(message.pub_id);
     }
     if (message.answers !== "") {
       writer.uint32(26).string(message.answers);
@@ -245,7 +245,7 @@ export const MsgCreateValidPubEvents = {
           message.creator = reader.string();
           break;
         case 2:
-          message.pubId = longToNumber(reader.uint64() as Long);
+          message.pub_id = longToNumber(reader.uint64() as Long);
           break;
         case 3:
           message.answers = reader.string();
@@ -270,10 +270,10 @@ export const MsgCreateValidPubEvents = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = Number(object.pubId);
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = Number(object.pub_id);
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     if (object.answers !== undefined && object.answers !== null) {
       message.answers = String(object.answers);
@@ -291,7 +291,7 @@ export const MsgCreateValidPubEvents = {
   toJSON(message: MsgCreateValidPubEvents): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.pub_id !== undefined && (obj.pub_id = message.pub_id);
     message.answers !== undefined && (obj.answers = message.answers);
     message.reput !== undefined && (obj.reput = message.reput);
     return obj;
@@ -308,10 +308,10 @@ export const MsgCreateValidPubEvents = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = object.pubId;
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = object.pub_id;
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     if (object.answers !== undefined && object.answers !== null) {
       message.answers = object.answers;
@@ -398,7 +398,7 @@ export const MsgCreateValidPubEventsResponse = {
 
 const baseMsgCreatePartPubEvents: object = {
   creator: "",
-  pubId: 0,
+  pub_id: 0,
   answers: "",
   amount: "",
 };
@@ -411,8 +411,8 @@ export const MsgCreatePartPubEvents = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.pubId !== 0) {
-      writer.uint32(16).uint64(message.pubId);
+    if (message.pub_id !== 0) {
+      writer.uint32(16).uint64(message.pub_id);
     }
     if (message.answers !== "") {
       writer.uint32(26).string(message.answers);
@@ -434,7 +434,7 @@ export const MsgCreatePartPubEvents = {
           message.creator = reader.string();
           break;
         case 2:
-          message.pubId = longToNumber(reader.uint64() as Long);
+          message.pub_id = longToNumber(reader.uint64() as Long);
           break;
         case 3:
           message.answers = reader.string();
@@ -457,10 +457,10 @@ export const MsgCreatePartPubEvents = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = Number(object.pubId);
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = Number(object.pub_id);
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     if (object.answers !== undefined && object.answers !== null) {
       message.answers = String(object.answers);
@@ -478,7 +478,7 @@ export const MsgCreatePartPubEvents = {
   toJSON(message: MsgCreatePartPubEvents): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.pub_id !== undefined && (obj.pub_id = message.pub_id);
     message.answers !== undefined && (obj.answers = message.answers);
     message.amount !== undefined && (obj.amount = message.amount);
     return obj;
@@ -493,10 +493,10 @@ export const MsgCreatePartPubEvents = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = object.pubId;
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = object.pub_id;
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     if (object.answers !== undefined && object.answers !== null) {
       message.answers = object.answers;
@@ -583,7 +583,7 @@ export const MsgCreatePartPubEventsResponse = {
 
 const baseMsgCreateCreatePubEvents: object = {
   creator: "",
-  pubId: 0,
+  pub_id: 0,
   question: "",
   answers: "",
   premAmount: "",
@@ -601,8 +601,8 @@ export const MsgCreateCreatePubEvents = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.pubId !== 0) {
-      writer.uint32(16).uint64(message.pubId);
+    if (message.pub_id !== 0) {
+      writer.uint32(16).uint64(message.pub_id);
     }
     if (message.question !== "") {
       writer.uint32(26).string(message.question);
@@ -645,7 +645,7 @@ export const MsgCreateCreatePubEvents = {
           message.creator = reader.string();
           break;
         case 2:
-          message.pubId = longToNumber(reader.uint64() as Long);
+          message.pub_id = longToNumber(reader.uint64() as Long);
           break;
         case 3:
           message.question = reader.string();
@@ -686,10 +686,10 @@ export const MsgCreateCreatePubEvents = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = Number(object.pubId);
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = Number(object.pub_id);
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     if (object.question !== undefined && object.question !== null) {
       message.question = String(object.question);
@@ -732,7 +732,7 @@ export const MsgCreateCreatePubEvents = {
   toJSON(message: MsgCreateCreatePubEvents): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.pub_id !== undefined && (obj.pub_id = message.pub_id);
     message.question !== undefined && (obj.question = message.question);
     if (message.answers) {
       obj.answers = message.answers.map((e) => e);
@@ -760,10 +760,10 @@ export const MsgCreateCreatePubEvents = {
     } else {
       message.creator = "";
     }
-    if (object.pubId !== undefined && object.pubId !== null) {
-      message.pubId = object.pubId;
+    if (object.pub_id !== undefined && object.pub_id !== null) {
+      message.pub_id = object.pub_id;
     } else {
-      message.pubId = 0;
+      message.pub_id = 0;
     }
     if (object.question !== undefined && object.question !== null) {
       message.question = object.question;

@@ -14,6 +14,7 @@ import { formDataAction } from "../../../../actions/newEvent.actions";
 import { connectToSign } from "../../../../contract/cosmosInit";
 import { CommonModule } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../../share/both/spinners/spinner-loading/spinner-loading.component";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "public-event-mobile",
@@ -42,14 +43,14 @@ export class PublicEventComponent implements OnDestroy {
   copyLinkFlag: boolean;
 
   constructor(
-    private store: Store<AppState>,
-    private _clipboardService: ClipboardService,
-    private PostService: PostService,
-    private GetService: GetService,
-    private modalService: NgbModal,
-    private router: Router,
+    readonly store: Store<AppState>,
+    readonly _clipboardService: ClipboardService,
+    readonly PostService: PostService,
+    readonly GetService: GetService,
+    readonly modalService: NgbModal,
+    readonly router: Router,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x && x.length !== 0) {
         this.nickName = x[0].nickName;
         this.host = x;
@@ -166,7 +167,7 @@ export class PublicEventComponent implements OnDestroy {
       typeUrl: "/bettery.publicevents.v1.MsgCreateCreatePubEvents",
       value: {
         creator: address,
-        pubId: id,
+        pub_id: id,
         question: this.formData.question,
         answers: this.getAnswers(),
         premAmount: "0", // TODO add for premium amount

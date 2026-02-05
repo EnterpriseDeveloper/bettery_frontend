@@ -53,8 +53,8 @@ export class AppComponent implements OnDestroy, OnInit {
           wallet: userData.pubKey.address,
           accessToken: userData.accessToken,
         };
-        this.autoLoginSub = this.post.post("user/auto_login", data).subscribe(
-          async (x: any) => {
+        this.autoLoginSub = this.post.post("user/auto_login", data).subscribe({
+          next: (x: any) => {
             this.addUser(
               x.email,
               x.nickName,
@@ -68,10 +68,10 @@ export class AppComponent implements OnDestroy, OnInit {
             );
             authHelp.setMemo(userData);
           },
-          (err) => {
+          error: (err) => {
             console.log("from auto login", err);
           },
-        );
+        });
       }
     }
   }

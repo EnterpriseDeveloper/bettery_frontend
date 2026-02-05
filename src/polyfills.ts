@@ -1,3 +1,9 @@
+/***************************************************************************************************
+ * Zone JS is required by default for Angular itself.
+ */
+import "zone.js"; // Included with Angular CLI.
+import "@angular/localize/init";
+
 (window as any).global = window;
 global.Buffer = global.Buffer || require("buffer").Buffer;
 

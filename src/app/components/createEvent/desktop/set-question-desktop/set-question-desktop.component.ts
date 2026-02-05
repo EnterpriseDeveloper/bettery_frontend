@@ -5,10 +5,6 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
-  ViewChild,
-  ElementRef,
-  ViewChildren,
-  QueryList,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -19,7 +15,6 @@ import {
 } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../../app.state";
-import { PostService } from "../../../../services/post.service";
 import { Subscription } from "rxjs";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { User } from "../../../../models/User.model";
@@ -28,6 +23,7 @@ import { formDataAction } from "../../../../actions/newEvent.actions";
 import { TextareaComponent } from "../../../share/mobile/textarea/textarea.component";
 import { ImageLoaderComponent } from "../../../share/both/image-loader/image-loader.component";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "set-question-desktop",
@@ -59,15 +55,14 @@ export class SetQuestionDesktopComponent implements OnInit, OnDestroy {
   isImgEditorOpened = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private store: Store<AppState>,
-    private http: PostService,
-    private modalService: NgbModal,
+    readonly formBuilder: FormBuilder,
+    readonly store: Store<AppState>,
+    readonly modalService: NgbModal,
     public activeModal: NgbActiveModal,
   ) {}
 
   ngOnInit(): void {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.registered = true;
         this.formDataReset();

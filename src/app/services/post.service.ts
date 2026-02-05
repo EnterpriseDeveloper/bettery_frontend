@@ -6,7 +6,7 @@ import { environment } from "../../environments/environment";
   providedIn: "root",
 })
 export class PostService {
-  constructor(private http: HttpClient) {}
+  constructor(readonly http: HttpClient) {}
 
   url = environment.apiUrl;
 

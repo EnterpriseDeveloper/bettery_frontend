@@ -28,6 +28,7 @@ import { InfoComponent } from "../info/info.component";
 import { CommentComponent } from "../../../../share/both/comment/comment.component";
 import { CommonModule } from "@angular/common";
 import { ValidateComponent } from "../validate/validate.component";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "event-start",
@@ -86,7 +87,7 @@ export class EventStartComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getUsers() {
-    this.storeSub = this.store.select("user").subscribe((x: User[]) => {
+    this.storeSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.currentPool = 0;
         this.playersJoinde = 0;

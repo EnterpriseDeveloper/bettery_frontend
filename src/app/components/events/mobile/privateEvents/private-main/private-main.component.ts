@@ -17,6 +17,7 @@ import { PrivateFormComponent } from "../private-form/private-form.component";
 import { PrivateExpertComponent } from "../private-expert/private-expert.component";
 import { BadRequestComponent } from "../bad-request/bad-request.component";
 import { PrivateEndEventComponent } from "../private-end-event/private-end-event.component";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "app-private-main",
@@ -69,7 +70,7 @@ export class PrivateMainComponent implements OnInit, OnDestroy {
     private _clipboardService: ClipboardService,
     private modalService: NgbModal,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userData = x[0];
         this.letsFindActivites(x[0]._id);

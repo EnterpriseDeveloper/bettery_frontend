@@ -19,6 +19,7 @@ import { SpinnerLoadingComponent } from "../../../share/both/spinners/spinner-lo
 import { DownBarComponentMobile } from "../../../navigation/down-bar-mobile/down-bar.component";
 import { FilterTimeLineMobileComponent } from "../../../share/mobile/filter-time-line-mobile/filter-time-line-mobile.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "app-event-feed-mobile",
@@ -72,12 +73,12 @@ export class EventFeedMobileComponent implements OnDestroy {
   prevScrollPos = window.scrollY;
 
   constructor(
-    private store: Store<AppState>,
-    private postService: PostService,
-    private modalService: NgbModal,
+    readonly store: Store<AppState>,
+    readonly postService: PostService,
+    readonly modalService: NgbModal,
   ) {
     this.storeUserSubscribe = this.store
-      .select("user")
+      .select(selectUsers)
       .subscribe((x: User[]) => {
         if (x.length === 0) {
           this.userId = null;

@@ -23,6 +23,7 @@ import { connectToSign } from "../../../../../contract/cosmosInit";
 import { ReputationModel } from "../../../../../models/Reputation.model";
 import { CommonModule } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../../../share/both/spinners/spinner-loading/spinner-loading.component";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "validate",
@@ -60,7 +61,7 @@ export class ValidateComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private _clipboardService: ClipboardService,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userData = x[0];
       }
@@ -175,7 +176,7 @@ export class ValidateComponent implements OnInit, OnDestroy {
       typeUrl: "/bettery.publicevents.v1.MsgCreateValidPubEvents",
       value: {
         creator: address,
-        pubId: this.eventData.id,
+        pub_id: this.eventData.id,
         answers: this.answerForm.value.answer,
         reput: this.reputation.expertRep,
       },

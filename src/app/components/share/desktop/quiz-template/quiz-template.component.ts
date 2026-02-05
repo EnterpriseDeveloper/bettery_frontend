@@ -400,11 +400,6 @@ export class QuizTemplateComponent
     this.setToNetwork(event);
   }
 
-  validateEvent(event) {
-    event.event_id = this.question.id;
-    this.setToNetworkValidation(event);
-  }
-
   async setAnswer(from) {
     if (this.disable === this.index) {
       return;
@@ -420,22 +415,18 @@ export class QuizTemplateComponent
         modalRef.componentInstance.description = "Choose at least one answer";
         modalRef.componentInstance.nameButton = "fine";
       } else {
-        if (from === "validate") {
-          this.setToNetworkValidation(answer);
+        if (Number(answer.amount) < 0.01) {
+          const modalRef = this.modalService.open(QuizErrorsComponent, {
+            centered: true,
+          });
+          modalRef.componentInstance.errType = "error";
+          modalRef.componentInstance.title = "Low amount";
+          modalRef.componentInstance.description =
+            "Amount must be bigger than 0.01";
+          modalRef.componentInstance.nameButton = "fine";
         } else {
-          if (Number(answer.amount) < 0.01) {
-            const modalRef = this.modalService.open(QuizErrorsComponent, {
-              centered: true,
-            });
-            modalRef.componentInstance.errType = "error";
-            modalRef.componentInstance.title = "Low amount";
-            modalRef.componentInstance.description =
-              "Amount must be bigger than 0.01";
-            modalRef.componentInstance.nameButton = "fine";
-          } else {
-            this.isDisabled();
-            this.setToNetwork(answer);
-          }
+          this.isDisabled();
+          this.setToNetwork(answer);
         }
       }
     } else {
@@ -479,7 +470,8 @@ export class QuizTemplateComponent
         typeUrl: "/bettery.publicevents.v1.MsgCreatePartPubEvents",
         value: {
           creator: address,
-          pubId: answer.event_id,
+          id: answer.event_id,
+          pub_id: answer.event_id,
           answers: answer.answerName,
           amount: _money,
         },
@@ -537,14 +529,14 @@ export class QuizTemplateComponent
     };
     this.answerSub = this.postService
       .post("publicEvents/participate", data)
-      .subscribe(
-        async () => {
+      .subscribe({
+        next: () => {
           this.updateUser();
           this.callGetData.next(null);
           this.disable = null;
           this.betDisable = false;
         },
-        (err) => {
+        error: (err) => {
           console.log(err);
           if (err.error.includes("not valid time")) {
             if (this.timePart(this.question)) {
@@ -576,138 +568,17 @@ export class QuizTemplateComponent
             let modalRef = this.modalService.open(QuizErrorsComponent, {
               centered: true,
             });
+            console.log(err);
             modalRef.componentInstance.errType = "error";
             modalRef.componentInstance.title = "Unknown Error";
-            modalRef.componentInstance.customMessage = String(err.error);
+            modalRef.componentInstance.customMessage = err;
             modalRef.componentInstance.description =
               "Report this unknown error to get 1 BET token!";
             modalRef.componentInstance.nameButton = "report error";
             this.disable = null;
           }
         },
-      );
-  }
-
-  async setToNetworkValidation(answer) {
-    let { memonic, address, client } = await connectToSign();
-    const msg = {
-      typeUrl: "bettery.publicevents.v1.MsgCreateValidPubEvents",
-      value: {
-        creator: address,
-        pubId: answer.event_id,
-        answers: answer.answerName,
-        reput: this.reputation.expertRep,
-      },
-    };
-    const fee = {
-      amount: [],
-      gas: "10000000000000",
-    };
-
-    try {
-      let transact: any = await client.signAndBroadcast(
-        address,
-        [msg],
-        fee,
-        memonic,
-      );
-      console.log(transact);
-      if (transact.transactionHash && transact.code == 0) {
-        this.setToDBValidation(transact.transactionHash, answer);
-      } else {
-        let modalRef = this.modalService.open(QuizErrorsComponent, {
-          centered: true,
-        });
-        modalRef.componentInstance.errType = "error";
-        modalRef.componentInstance.title = "Unknown Error";
-        modalRef.componentInstance.customMessage = JSON.stringify(transact);
-        modalRef.componentInstance.description =
-          "Report this unknown error to get 1 BET token!";
-        modalRef.componentInstance.nameButton = "report error";
-      }
-    } catch (err: any) {
-      let modalRef = this.modalService.open(QuizErrorsComponent, {
-        centered: true,
       });
-      modalRef.componentInstance.errType = "error";
-      modalRef.componentInstance.title = "Unknown Error";
-      modalRef.componentInstance.customMessage = String(err.error);
-      modalRef.componentInstance.description =
-        "Report this unknown error to get 1 BET token!";
-      modalRef.componentInstance.nameButton = "report error";
-    }
-  }
-
-  setToDBValidation(transactionHash, answer) {
-    this.myAnswers.answered = true;
-    this.myAnswers.from = "validator";
-
-    let data = {
-      event_id: answer.event_id,
-      answer: answer.answer,
-      reputation: this.reputation.expertRep,
-      transactionHash: "0x" + transactionHash,
-    };
-    this.validSub = this.postService
-      .post("publicEvents/validate", data)
-      .subscribe(
-        async () => {
-          this.updateUser();
-          this.callGetData.next(null);
-          this.validDisable = false;
-        },
-        (err) => {
-          console.log(err);
-          // TODO change error handler
-          if (err.error.includes("not valid time")) {
-            if (this.timeValidating(this.question)) {
-              let modalRef = this.modalService.open(QuizErrorsComponent, {
-                centered: true,
-              });
-              modalRef.componentInstance.errType = "time";
-              modalRef.componentInstance.title = "Validation time’s not start";
-              modalRef.componentInstance.customMessage =
-                "Validation time for this event not start";
-              modalRef.componentInstance.description =
-                "Expert can join when validating time is start";
-              modalRef.componentInstance.nameButton = "fine";
-            } else if (!this.timeValidating(this.question)) {
-              let modalRef = this.modalService.open(QuizErrorsComponent, {
-                centered: true,
-              });
-              modalRef.componentInstance.errType = "time";
-              modalRef.componentInstance.title = "Validation time’s over";
-              modalRef.componentInstance.customMessage =
-                "Validation time for this event is over, ";
-              modalRef.componentInstance.description =
-                "No more Experts can join now.";
-              modalRef.componentInstance.nameButton = "fine";
-            }
-          } else if (err.error.includes("user participate")) {
-            let modalRef = this.modalService.open(QuizErrorsComponent, {
-              centered: true,
-            });
-            modalRef.componentInstance.errType = "error";
-            modalRef.componentInstance.title =
-              "You participated in this event.";
-            modalRef.componentInstance.customMessage =
-              "You have been like the participant in this event. ";
-            modalRef.componentInstance.description =
-              "The participant can't be the Experts.";
-            modalRef.componentInstance.nameButton = "fine";
-          } else {
-            let modalRef = this.modalService.open(QuizErrorsComponent, {
-              centered: true,
-            });
-            modalRef.componentInstance.errType = "error";
-            modalRef.componentInstance.title = "Unknown Error";
-            modalRef.componentInstance.customMessage = String(err.error);
-            modalRef.componentInstance.description =
-              "Report this unknown error to get 1 BET token!";
-            modalRef.componentInstance.nameButton = "report error";
-          }
-        },
-      );
   }
 
   updateUser() {

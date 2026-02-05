@@ -21,7 +21,6 @@
             "index": "src/index.html",
             "main": "src/app/app.module.ts",
             "tsConfig": "tsconfig.app.json",
-            "polyfills": ["@angular/localize/init", "zone.js"],
             "assets": [
               "src/favicon.ico",
               "src/.htaccess",
@@ -94,7 +93,6 @@
             "main": "src/test.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "polyfills": ["@angular/localize/init", "zone.js"],
             "assets": [
               "src/favicon.ico",
               "src/assets",

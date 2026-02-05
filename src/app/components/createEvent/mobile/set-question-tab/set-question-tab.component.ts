@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  ViewChildren,
-  QueryList,
-} from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -19,7 +8,6 @@ import {
 } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../../app.state";
-import { PostService } from "../../../../services/post.service";
 import { Subscription } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { User } from "../../../../models/User.model";
@@ -30,6 +18,7 @@ import { TextareaComponent } from "../../../share/mobile/textarea/textarea.compo
 import { ImageLoaderComponent } from "../../../share/both/image-loader/image-loader.component";
 import { EventsTemplateNewComponent } from "../events-template-new/events-template-new.component";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "set-question-tab",
@@ -62,11 +51,10 @@ export class SetQuestionTabComponent implements OnInit, OnDestroy {
   isImgEditorOpened = false;
   clearEventImage;
   constructor(
-    private formBuilder: FormBuilder,
-    private store: Store<AppState>,
-    private http: PostService,
-    private modalService: NgbModal,
-    private router: Router,
+    readonly formBuilder: FormBuilder,
+    readonly store: Store<AppState>,
+    readonly modalService: NgbModal,
+    readonly router: Router,
   ) {
     this.formDataSubscribe = this.store
       .select("createEvent")
@@ -76,7 +64,7 @@ export class SetQuestionTabComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x && x.length != 0) {
         this.formDataSubscribe = this.store
           .select("createEvent")

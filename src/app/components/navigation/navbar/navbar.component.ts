@@ -30,6 +30,7 @@ import { CommonModule, DecimalPipe } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { NotificationsComponent } from "../notifications/notifications.component";
 import { RouterModule } from "@angular/router";
+import { selectUsers } from "../../../selectors/user.selector";
 
 @Component({
   selector: "navbar",
@@ -79,7 +80,7 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
   ) {
     this.detectPath();
 
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length !== 0) {
         this.nickName = x[0].nickName;
         this.userWallet = x[0].wallet;

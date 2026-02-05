@@ -15,6 +15,7 @@ import { CommonModule } from "@angular/common";
 import { MobilePlugPageComponent } from "../../share/desktop/mobile-plug-page/mobile-plug-page.component";
 import { SpinnerLoadingComponent } from "../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { FormsModule } from "@angular/forms";
+import { selectUsers } from "../../../selectors/user.selector";
 
 @Component({
   selector: "app-rooms",
@@ -248,7 +249,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
   }
 
   findCurrentUser(): void {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length !== 0) {
         this.userData = x[0];
         if (this.btnMiddleActive === this.SHOW_USERS_ROOM) {

@@ -5,6 +5,7 @@ import { AppState } from "../../../../../app.state";
 import { User } from "../../../../../models/User.model";
 import { CommentComponent } from "../../../../share/both/comment/comment.component";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "app-private-end-event",
@@ -21,10 +22,10 @@ export class PrivateEndEventComponent implements OnInit, OnDestroy {
   participatedIndex: number;
   userData: User;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(readonly store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userData = x[0];
         this.letsFindActivites(x[0]._id);

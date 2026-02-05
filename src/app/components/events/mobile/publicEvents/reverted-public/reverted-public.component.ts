@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
 import { CommentComponent } from "../../../../share/both/comment/comment.component";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "app-reverted-public",
@@ -22,7 +23,7 @@ export class RevertedPublicComponent implements OnDestroy {
   }
 
   getUsers() {
-    this.storeSub = this.store.select("user").subscribe((x: User[]) => {
+    this.storeSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userData = x[0];
       } else {

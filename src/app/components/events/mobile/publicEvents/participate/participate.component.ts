@@ -26,6 +26,7 @@ import { connectToSign } from "../../../../../contract/cosmosInit";
 import { GetService } from "../../../../../services/get.service";
 import { CommonModule } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../../../share/both/spinners/spinner-loading/spinner-loading.component";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   standalone: true,
@@ -61,7 +62,7 @@ export class ParticipateComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private GetService: GetService,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userData = x[0];
       }
@@ -137,7 +138,7 @@ export class ParticipateComponent implements OnInit, OnDestroy {
         typeUrl: "/bettery.publicevents.v1.MsgCreatePartPubEvents",
         value: {
           creator: address,
-          pubId: this.eventData.id,
+          pub_id: this.eventData.id,
           answers: this.answerForm.value.answer,
           amount: _money,
         },
@@ -186,9 +187,9 @@ export class ParticipateComponent implements OnInit, OnDestroy {
           this.goViewStatus.next(this.eventData.id);
         },
         (err) => {
+          console.log(err);
           this.spinnerLoading = false;
           this.errorMessage = String(err.error);
-          console.log(err);
         },
       );
   }

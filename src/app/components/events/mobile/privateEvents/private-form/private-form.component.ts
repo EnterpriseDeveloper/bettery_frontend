@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   OnDestroy,
 } from "@angular/core";
@@ -21,6 +20,7 @@ import { User } from "../../../../../models/User.model";
 import { connectToSign } from "../../../../../contract/cosmosInit";
 import { SpinnerLoadingComponent } from "../../../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "app-private-form",
@@ -28,7 +28,7 @@ import { CommonModule } from "@angular/common";
   styleUrls: ["./private-form.component.sass"],
   imports: [CommonModule, SpinnerLoadingComponent, ReactiveFormsModule],
 })
-export class PrivateFormComponent implements OnInit, OnDestroy {
+export class PrivateFormComponent implements OnDestroy {
   answerForm: FormGroup;
   @Input() data: PrivEventMobile;
   formValid: boolean;
@@ -40,17 +40,17 @@ export class PrivateFormComponent implements OnInit, OnDestroy {
   spinnerLoading = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private store: Store<AppState>,
-    private postService: PostService,
+    readonly formBuilder: FormBuilder,
+    readonly store: Store<AppState>,
+    readonly postService: PostService,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.userData = x[0];
       }
     });
 
-    this.answerForm = formBuilder.group({
+    this.answerForm = this.formBuilder.group({
       answer: ["", Validators.required],
     });
   }
@@ -59,16 +59,11 @@ export class PrivateFormComponent implements OnInit, OnDestroy {
     return this.answerForm.controls;
   }
 
-  ngOnInit(): void {}
-
   sendAnswer(answerForm: any) {
     if (answerForm.status === "INVALID") {
       this.formValid = true;
       return;
     }
-    // const index = this.data.answers.findIndex((el => {
-    //   return el === answerForm.value.answer;
-    // }));
     this.sendToDemon(answerForm.value.answer);
   }
 

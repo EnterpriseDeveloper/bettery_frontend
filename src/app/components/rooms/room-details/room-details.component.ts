@@ -20,6 +20,7 @@ import { SpinnerLoadingComponent } from "../../share/both/spinners/spinner-loadi
 import { SpinnerLoadMoreComponent } from "../../share/both/spinners/spinner-load-more/spinner-load-more.component";
 import { MobilePlugPageComponent } from "../../share/desktop/mobile-plug-page/mobile-plug-page.component";
 import { FormsModule } from "@angular/forms";
+import { selectUsers } from "../../../selectors/user.selector";
 
 @Component({
   selector: "app-room-details",
@@ -84,7 +85,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
   ) {
     this.storeUserSubscribe = this.store
-      .select("user")
+      .select(selectUsers)
       .subscribe((x: User[]) => {
         if (x.length === 0) {
           this.userId = null;

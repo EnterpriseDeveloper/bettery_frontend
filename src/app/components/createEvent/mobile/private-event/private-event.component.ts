@@ -15,6 +15,7 @@ import { formDataAction } from "../../../../actions/newEvent.actions";
 import { connectToSign } from "../../../../contract/cosmosInit";
 import { CommonModule } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../../share/both/spinners/spinner-loading/spinner-loading.component";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "private-event-modile",
@@ -42,14 +43,14 @@ export class PrivateEventComponent implements OnDestroy {
   copyLinkFlag: boolean;
 
   constructor(
-    private getSevice: GetService,
-    private postService: PostService,
-    private store: Store<AppState>,
-    private _clipboardService: ClipboardService,
-    private router: Router,
-    private modalService: NgbModal,
+    readonly getSevice: GetService,
+    readonly postService: PostService,
+    readonly store: Store<AppState>,
+    readonly _clipboardService: ClipboardService,
+    readonly router: Router,
+    readonly modalService: NgbModal,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x?.length != 0) {
         this.host = x;
       }

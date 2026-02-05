@@ -7,7 +7,6 @@ import {
 } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../../app.state";
-import { ClipboardService } from "ngx-clipboard";
 import { PostService } from "../../../../services/post.service";
 import { GetService } from "../../../../services/get.service";
 import { Subscription } from "rxjs";
@@ -20,6 +19,7 @@ import { formDataAction } from "../../../../actions/newEvent.actions";
 import { connectToSign } from "../../../../contract/cosmosInit";
 import { CommonModule } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../../share/both/spinners/spinner-loading/spinner-loading.component";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "public-event-desktop",
@@ -46,14 +46,13 @@ export class PublicEventDesktopComponent implements OnDestroy {
   pastTime: boolean;
 
   constructor(
-    private store: Store<AppState>,
-    private _clipboardService: ClipboardService,
-    private PostService: PostService,
-    private GetService: GetService,
-    private modalService: NgbModal,
-    private router: Router,
+    readonly store: Store<AppState>,
+    readonly PostService: PostService,
+    readonly GetService: GetService,
+    readonly modalService: NgbModal,
+    readonly router: Router,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length !== 0) {
         this.nickName = x[0].nickName;
         this.host = x;
@@ -158,7 +157,7 @@ export class PublicEventDesktopComponent implements OnDestroy {
       typeUrl: "/bettery.publicevents.v1.MsgCreateCreatePubEvents",
       value: {
         creator: address,
-        pubId: id,
+        pub_id: id,
         question: this.formData.question,
         answers: this.getAnswers(),
         premAmount: "0", // TODO add for premium amount

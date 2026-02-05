@@ -9,6 +9,7 @@ import { ClipboardService } from "ngx-clipboard";
 import { PubEventMobile } from "../../../../../models/PubEventMobile.model";
 import { CommonModule } from "@angular/common";
 import { CommentComponent } from "../../../../share/both/comment/comment.component";
+import { selectUsers } from "../../../../../selectors/user.selector";
 
 @Component({
   selector: "event-finish",
@@ -41,7 +42,7 @@ export class EventFinishComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currencyType = this.eventData.currencyType == "token" ? "BET" : "ETH";
-    this.userSub = this.store.select("user").subscribe((x) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x) => {
       if (x.length != 0) {
         this.userData = x[0];
         if (this.eventData.host.id === x[0]._id) {

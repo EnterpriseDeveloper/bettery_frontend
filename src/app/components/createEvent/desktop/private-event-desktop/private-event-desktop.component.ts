@@ -8,7 +8,6 @@ import {
 import { PostService } from "../../../../services/post.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../../app.state";
-import { ClipboardService } from "ngx-clipboard";
 import { Subscription } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { InfoModalComponent } from "../../../share/both/modals/info-modal/info-modal.component";
@@ -20,6 +19,7 @@ import { GetService } from "../../../../services/get.service";
 import { connectToSign } from "../../../../contract/cosmosInit";
 import { SpinnerLoadingComponent } from "../../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { CommonModule } from "@angular/common";
+import { selectUsers } from "../../../../selectors/user.selector";
 
 @Component({
   selector: "private-event-desktop",
@@ -44,13 +44,12 @@ export class PrivateEventDesktopComponent implements OnDestroy {
   deleteEventSub: Subscription;
 
   constructor(
-    private postService: PostService,
-    private getService: GetService,
-    private store: Store<AppState>,
-    private _clipboardService: ClipboardService,
-    private modalService: NgbModal,
+    readonly postService: PostService,
+    readonly getService: GetService,
+    readonly store: Store<AppState>,
+    readonly modalService: NgbModal,
   ) {
-    this.userSub = this.store.select("user").subscribe((x: User[]) => {
+    this.userSub = this.store.select(selectUsers).subscribe((x: User[]) => {
       if (x.length != 0) {
         this.host = x;
       }
@@ -76,15 +75,15 @@ export class PrivateEventDesktopComponent implements OnDestroy {
 
     this.createSub = this.getService
       .get("privateEvents/create_event_id")
-      .subscribe(
-        (x: any) => {
+      .subscribe({
+        next: (x: any) => {
           console.log("send To Demon");
           this.sendToDemon(x.id);
         },
-        (err) => {
+        error: (err) => {
           console.log("create private event id err", err.message);
         },
-      );
+      });
   }
 
   async sendToDemon(id: number) {
@@ -139,14 +138,14 @@ export class PrivateEventDesktopComponent implements OnDestroy {
   deleteEventId(id) {
     this.deleteEventSub = this.postService
       .post("privateEvents/delete_event_id", { id })
-      .subscribe(
-        (x: any) => {
+      .subscribe({
+        next: (x) => {
           console.log(x);
         },
-        (err) => {
+        error: (err) => {
           console.log("err from delete event id", err);
         },
-      );
+      });
   }
 
   sendToDb(transactionHash: any, id: number) {
@@ -175,8 +174,8 @@ export class PrivateEventDesktopComponent implements OnDestroy {
 
     this.createSub = this.postService
       .post("privateEvents/createEvent", this.eventData)
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           this.spinnerLoading = false;
           this.calculateDate();
           this.spinner = false;
@@ -184,7 +183,7 @@ export class PrivateEventDesktopComponent implements OnDestroy {
           this.modalService.dismissAll();
           this.formDataReset();
         },
-        (err) => {
+        error: (err) => {
           console.log("set qestion error");
           console.log(err);
           if (err.error == "Limit is reached") {
@@ -194,7 +193,7 @@ export class PrivateEventDesktopComponent implements OnDestroy {
             this.spinnerLoading = false;
           }
         },
-      );
+      });
   }
 
   formDataReset() {

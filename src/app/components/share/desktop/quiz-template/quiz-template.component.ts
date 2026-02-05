@@ -12,7 +12,7 @@ import {
 } from "@angular/core";
 import { User } from "../../../../models/User.model";
 import { Answer } from "../../../../models/Answer.model";
-import Web3 from "web3";
+import { parseEther } from "viem";
 import * as UserActions from "../../../../actions/user.actions";
 import { PostService } from "../../../../services/post.service";
 import { Store } from "@ngrx/store";
@@ -462,8 +462,7 @@ export class QuizTemplateComponent
       modalRef.componentInstance.nameButton = "fine";
       this.disable = null;
     } else {
-      let web3 = new Web3();
-      var _money = web3.utils.toWei(String(answer.amount), "ether");
+      const _money = parseEther(answer.amount.toString());
       let { memonic, address, client } = await connectToSign();
 
       const msg = {

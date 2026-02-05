@@ -15,7 +15,6 @@ import {
   Validators,
 } from "@angular/forms";
 import { ClipboardService } from "ngx-clipboard";
-import Web3 from "web3";
 import { PostService } from "../../../../../services/post.service";
 import * as CoinsActios from "../../../../../actions/coins.actions";
 import { Subscription } from "rxjs";
@@ -27,6 +26,7 @@ import { GetService } from "../../../../../services/get.service";
 import { CommonModule } from "@angular/common";
 import { SpinnerLoadingComponent } from "../../../../share/both/spinners/spinner-loading/spinner-loading.component";
 import { selectUsers } from "../../../../../selectors/user.selector";
+import { parseEther } from "viem";
 
 @Component({
   standalone: true,
@@ -127,11 +127,7 @@ export class ParticipateComponent implements OnInit, OnDestroy {
       return;
     } else {
       this.spinnerLoading = true;
-      let web3 = new Web3();
-      var _money = web3.utils.toWei(
-        String(this.answerForm.value.amount),
-        "ether",
-      );
+      var _money = parseEther(this.answerForm.value.amount.toString());
       let { memonic, address, client } = await connectToSign();
 
       const msg = {

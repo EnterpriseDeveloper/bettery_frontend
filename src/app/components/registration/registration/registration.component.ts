@@ -8,7 +8,6 @@ import {
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../app.state";
 import { PostService } from "../../../services/post.service";
-import Web3 from "web3";
 import { Router } from "@angular/router";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
@@ -31,7 +30,6 @@ export class RegistrationComponent implements OnDestroy {
 
   submitted: boolean = false;
   registerError: any = undefined;
-  web3: Web3 | undefined = null;
   metamaskError: string = undefined;
   userWallet: string = undefined;
   validateSubscribe: Subscription;

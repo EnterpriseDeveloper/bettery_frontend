@@ -13,15 +13,6 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { NgZone } from "@angular/core";
 
-declare global {
-  interface Window {
-    web3: any;
-    biconomy: any;
-  }
-}
-
-window.web3 = window.web3 || {};
-
 @Component({
   standalone: true,
   selector: "app-root",

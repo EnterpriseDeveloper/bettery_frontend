@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Coins } from "../../../models/Coins.model";
-import Web3 from "web3";
 import { connectToSign } from "../../../contract/cosmosInit";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { parseEther } from "viem";
 
 @Component({
   selector: "app-swap-bet",
@@ -22,10 +22,10 @@ export class SwapBetComponent {
   constructor(public activeModal: NgbActiveModal) {}
 
   async swipe() {
-    let web3 = new Web3();
     if (Number(this.coinInfo.BET) > this.inputValue) {
       this.error = undefined;
-      let amount = web3.utils.toWei(String(this.inputValue), "ether");
+      let amount = parseEther(this.inputValue.toString());
+
       let { memonic, address, client } = await connectToSign();
 
       const msg = {

@@ -15,7 +15,6 @@ import * as ReputationAction from "../../../actions/reputation.action";
 import * as UserActions from "../../../actions/user.actions";
 import { ClipboardService } from "ngx-clipboard";
 
-import Web3 from "web3";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
 import { User } from "../../../models/User.model";
@@ -48,7 +47,6 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
   @ViewChild("insideElement", { static: false }) insideElement;
 
   nickName: string = undefined;
-  web3: Web3 | undefined = null;
   coinInfo: Coins = null;
   amountSpinner = true;
   userWallet: string = undefined;

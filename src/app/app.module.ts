@@ -17,7 +17,6 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ErcCoinSaleComponent } from "./components/erc-coin-sale/erc-coin-sale.component";
 import { RoomsComponent } from "./components/rooms/rooms/rooms.component";
 import { provideTranslateService } from "@ngx-translate/core";
 import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
@@ -41,7 +40,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(
       [
         { path: "", component: HomeComponent },
-        { path: "tokensale", component: ErcCoinSaleComponent },
         { path: "privacy-policy", component: PrivacyPolicyComponent },
         { path: "join", component: RoomsComponent },
         { path: "auth", component: AuthComponent },
